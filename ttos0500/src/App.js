@@ -20,7 +20,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8000/api/products")
+    fetch("http://172.20.10.13/api/articles",{
+		mode: "cors",
+		headers: {
+			"authorization":"Bearer mFJNtZUMkGuoykjNg7dzZP4GBZoPTovVyYPMtsvDu2K5GBerjw33SW1XSeao",
+		}
+	})
       .then(res => res.json())
       .then(
         (result) => {
@@ -121,7 +126,7 @@ class App extends Component {
         <ul>
             {this.state.products.map(product => (
             <li key={product.id}>
-              ID:{product.id} PRICE:{product.price} DESC:{product.description}
+              ID:{product.id} PRICE:{product.body} DESC:{product.title}
             </li>
             ))}
         </ul>
