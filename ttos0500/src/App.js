@@ -21,7 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     fetch("http://172.20.10.13/api/articles",{
-		mode: "cors",
+		
 		headers: {
 			"authorization":"Bearer mFJNtZUMkGuoykjNg7dzZP4GBZoPTovVyYPMtsvDu2K5GBerjw33SW1XSeao",
 		}
