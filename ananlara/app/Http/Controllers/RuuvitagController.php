@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use App\Ruuvitag;
+use DB;
  
 class RuuvitagController extends Controller
 {
@@ -47,5 +48,79 @@ class RuuvitagController extends Controller
  
         return response()->json(null, 204);
     }
- 
+    
+    public function tagdata($tag)
+    {
+        $data = Ruuvitag::find($tag)->data;
+        
+        echo $data;
+    }
+    
+    public function tagtemp($tag)
+    {
+        $taga = Ruuvitag::find($tag);
+        
+        $data = $taga->data()->select('Temp', 'Time')->get();
+        
+        echo $data;
+    }
+    
+    public function tagtempd($tag)
+    {
+        $taga = Ruuvitag::find($tag);
+        
+        $data = $taga->data()->select('Temp', 'Time')->get();
+        
+        echo $data;
+    }
+    
+    public function tagtemph($tag, $day)
+    {
+        //SELECT [activity_dt], count(*) FROM table1 GROUP BY hour( activity_dt ) , day( activity_dt )
+        
+        $day = $day . '%';
+        
+        //select `Temp`, `CAST(Time` as `day)` from `Data`
+        
+        //select `Temp`, `CAST(Time` as `day)` from `Data`
+        
+        //select Temp, cast(Time as day) from `Data` 
+        
+        $taga = Ruuvitag::find($tag);
+        
+        //>whereDate('created_at', '2016-12-31')
+        //select('Temp', CAST(Time AS day))
+        //selectRaw('Temp, * CAST(Time AS day)')
+        
+        $data = $taga->data()->selectRaw('Temp, cast(Time as time) as Time')->where('Time', 'like', $day)->get();
+        
+        echo $data;
+    }
+    
+    public function taghum($tag)
+    {
+        $taga = Ruuvitag::find($tag);
+        
+        $data = $taga->data()->select('Temp', 'Time')->get();
+        
+        echo $data;
+    }
+    
+    public function taghumd($tag)
+    {
+        $taga = Ruuvitag::find($tag);
+        
+        $data = $taga->data()->select('Temp', 'Time')->get();
+        
+        echo $data;
+    }
+    
+    public function taghumh($tag)
+    {
+        $taga = Ruuvitag::find($tag);
+        
+        $data = $taga->data()->select('Temp', 'Time')->get();
+        
+        echo $data;
+    }
 }

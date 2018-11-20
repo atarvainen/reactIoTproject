@@ -57,120 +57,72 @@ class App extends Component {
       lineData: {},
       error: null,
       isLoaded: false,
-      products: []
+      axisy: [],
+      axisx: []
     }
   }
 
-  componentWillMount() {
-    this.getChartData();
-  }
-  
-  getChartData() {
+  componentDidMount() {
     // Ajax calls here
-    fetch("http://localhost:8000/api/data")
+    fetch("http://localhost:8000/api/tagtemp/257385652260480/day/2018-11-19")
     .then(res => res.json())
     .then(
       (result) => {
-        //console.log(result);
         this.setState({
+          lineData: {
+            labels: result.map(x => x.Time),
+            datasets: [
+              {
+                label: "Tag",
+                borderColor: "rgba(0,0,0,0.8)",
+                data: result.map(x => x.Temp)
+              }
+            ]
+          },
+          barData: {
+            labels: result.map(x => x.Time),
+            datasets: [
+                {
+                  label: "Hannu",
+                  backgroundColor: "rgba(0,0,0,0.8)",
+                  data: result.map(x => x.Temp)
+                }
+            ]
+          },
           isLoaded: true,
-          products: result
+          axisy: result.map(x => x.Time),
+          axisx: result.map(x => x.Temp)
         });
       },
-      // Note: it's important to handle errors hereasdf
+      // Note: it's important to handle errors here
       // instead of a catch() block so that we don't swallow
       // exceptions from actual bugs in components.
       (error) => {
         this.setState({
-          isLoaded: true,
+          isLoaded: false,
           error
         });
         //console.log(this.state.error);
       }
     )
-
-    this.setState({
-      barData: {
-        labels: ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai"],
-        datasets: [
-            {
-              label: "Hannu",
-              backgroundColor: "rgba(0,0,0,0.8)",
-              data: [5, 5, 5, 5, 5]
-            },
-            {
-              label: "AnttiT",
-              backgroundColor: "rgba(255,0,0,0.8)",
-              data: [5, 5, 5, 5, 5]
-            },
-            {
-              label: "Pekka",
-              backgroundColor: "rgba(0,255,0,0.8)",
-              data: [2, 1, 0, 2, 3]
-            },
-            {
-              label: "AnttiK",
-              backgroundColor: "rgba(0,0,255,0.8)",
-              data: [1, 7, 3, 2, 1]
-            },
-            {
-              label: "Saku",
-              backgroundColor: "rgba(255,255,0,0.8)",
-              data: [1, 1, 1, 2, 6]
-            }
-        ]
-      },
-      lineData: {
-        labels: ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai"],
-        datasets: [
-            {
-              label: "Hannu",
-              borderColor: "rgba(0,0,0,0.8)",
-              data: [3, 2, 5, 6, 7]
-            },
-            {
-              label: "AnttiT",
-              borderColor: "rgba(255,0,0,0.8)",
-              data: [5, 5, 5, 5, 5]
-            },
-            {
-              label: "Pekka",
-              borderColor: "rgba(0,255,0,0.8)",
-              data: [2, 1, 0, 2, 3]
-            },
-            {
-              label: "AnttiK",
-              borderColor: "rgba(0,0,255,0.8)",
-              data: [1, 7, 3, 2, 1]
-            },
-            {
-              label: "Saku",
-              borderColor: "rgba(255,255,0,0.8)",
-              data: [1, 1, 1, 2, 6]
-            }
-        ]
-      }
-    });
   }
 
   render() {
+    if(this.state.isLoaded == true){
+      return (
+        <div className="App">
+          <header className="App-header">
+            <Navbar />
+            <h1>Relaamon lämpötila</h1>
+            <Chart barData={this.state.barData} title="Temp" legendPosition="bottom"/>
+            <Chart lineData={this.state.lineData} title="Temp" legendPosition="bottom"/>
+          </header>
+        </div>
+      );
+    }
     return (
-      <div className="App">
-        <header className="App-header">
-          <Navbar />
-          <h1>Relaamon läsnäolo</h1>
-          <Chart barData={this.state.barData} title="Läsnäolo" legendPosition="bottom"/>
-          <Chart lineData={this.state.lineData} title="Läsnäolo" legendPosition="bottom"/>
-        </header>
-        <ul>
-            {this.state.products.map((product, index) => (
-            <li key={index}>
-              ID:{product.Count} Temp:{product.Temp} Pressure:{product.Pressure}
-            </li>
-            ))}
-        </ul>
-      </div>
-    );
+      'Loading...'
+    )
   }
 }
 

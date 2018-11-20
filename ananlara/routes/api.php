@@ -26,18 +26,6 @@ Route::delete('products/{product}', array('middleware' => 'cors', 'uses' => 'Pro
 
 //Data routes
 
-/*
-Route::get('data', array('middleware' => 'cors', 'uses' => 'DataController@index'));
- 
-Route::get('data/{data}', array('middleware' => 'cors', 'uses' => 'DataController@show'));
- 
-Route::post('data', array('middleware' => 'cors', 'uses' => 'DataController@store'));
- 
-Route::put('data/{data}', array('middleware' => 'cors', 'uses' => 'DataController@update'));
- 
-Route::delete('data/{data}/', array('middleware' => 'cors', 'uses' => 'DataController@delete'));
-*/
-
 Route::get('data', 'DataController@index');
  
 Route::get('data/{data}', 'DataController@show');
@@ -53,6 +41,20 @@ Route::delete('data/{data}', 'DataController@delete');
 Route::get('tags', 'RuuvitagController@index');
  
 Route::get('tags/{tag}', 'RuuvitagController@show');
+
+Route::get('tagdata/{tag}', 'RuuvitagController@tagdata');
+
+Route::get('tagtemp/{tag}', 'RuuvitagController@tagtemp');
+
+//Route::get('tagtempdaily/{tag}', 'RuuvitagController@tagtempd');
+
+Route::get('tagtemp/{tag}/day/{day}', 'RuuvitagController@tagtemph');
+
+Route::get('taghum', 'RuuvitagController@taghum');
+
+Route::get('taghumdaily', 'RuuvitagController@taghumd');
+
+Route::get('taghumhourly/{day}', 'RuuvitagController@taghumh');
  
 Route::post('tags', 'RuuvitagController@store');
  

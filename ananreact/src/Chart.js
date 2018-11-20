@@ -11,11 +11,11 @@ class Chart extends Component {
         }
     }
 
-static defaultProps = {
-    displayTitle: true,
-    displayLegend: true,
-    legendPosition: 'right'
-}
+    static defaultProps = {
+        displayTitle: true,
+        displayLegend: true,
+        legendPosition: 'right'
+    }
 
     render() {
         if(this.state.barData != null)
