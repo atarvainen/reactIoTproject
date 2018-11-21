@@ -4,6 +4,10 @@ Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel RES
 
 # Laravel API Query Builder
 
+Admin paneeli Joose
+Autentikointi 
+
+
 {"Count":159,"Temp":62,"Humidity":55,"Pressure":7953,"Acceleration-X":7615,"Acceleration-Y":9340,"Acceleration-Z":1252,"Power":702,"Time":"2018-11-19 15:35:42","RuuviTagId":"257385652260480"},
 
 Tarvittavia queryja:
@@ -29,3 +33,11 @@ Tagin viimeisin Power ja DateTime
 SELECT [activity_dt], count(*)
 FROM table1
 GROUP BY hour( activity_dt ) , day( activity_dt )
+
+
+# React
+
+näkymiä lisää
+login lomake toimimaan
+käyttäjätietojen vaihto
+Maybe serviceworker
