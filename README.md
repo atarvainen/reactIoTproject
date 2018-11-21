@@ -4,7 +4,7 @@ Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel RES
 
 # Laravel API Query Builder
 
-Admin paneeli Joose
+Admin paneeli Joose //tekee tämän
 Autentikointi 
 
 
