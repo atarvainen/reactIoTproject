@@ -3,6 +3,7 @@ import './App.css';
 import Chart from './Chart'
 import Navbar from './Navbar'
 
+/*
 function fetchDelete() {
   fetch("http://localhost:8000/api/tags/12341234", {
     method: 'delete',
@@ -24,10 +25,10 @@ function fetchPost() {
       User: 'Pekka',
     })
   })
-  .then(function (datas) {  
+  .then((datas) => {  
     console.log('Request success: ', datas);
-  })  
-  .catch(function (error) {  
+  },
+  (error) => {  
     console.log('Request failure: ', error);
   });
 }
@@ -41,13 +42,14 @@ function fetchPut() {
       User: 'Pekka',
     })
   })
-  .then(function (datas) {  
+  .then((datas) => {  
     console.log('Request success: ', datas);
-  })  
-  .catch(function (error) {  
+  },
+  (error) => {  
     console.log('Request failure: ', error);
   });
 }
+*/
 
 class App extends Component {
   constructor() {
@@ -82,11 +84,11 @@ class App extends Component {
           barData: {
             labels: result.map(x => x.Time),
             datasets: [
-                {
-                  label: "Hannu",
-                  backgroundColor: "rgba(0,0,0,0.8)",
-                  data: result.map(x => x.Temp)
-                }
+              {
+                label: "Hannu",
+                backgroundColor: "rgba(0,0,0,0.8)",
+                data: result.map(x => x.Temp)
+              }
             ]
           },
           isLoaded: true,
@@ -94,21 +96,17 @@ class App extends Component {
           axisx: result.map(x => x.Temp)
         });
       },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
       (error) => {
         this.setState({
           isLoaded: false,
           error
         });
-        //console.log(this.state.error);
       }
     )
   }
 
   render() {
-    if(this.state.isLoaded == true){
+    if(this.state.isLoaded === true){
       return (
         <div className="App">
           <header className="App-header">

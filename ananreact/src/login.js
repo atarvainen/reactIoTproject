@@ -6,11 +6,28 @@ class Login extends Component {
       super();
       this.state = {
         value: "Username",
-        pass: "password"
+        pass: "password",
+        useless: ""
       }
       this.handleClick = this.handleClick.bind(this);
       this.handleFocus = this.handleFocus.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      //this.handleSubmit = this.handleSubmit.bind(this);asdfasdf
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      fetch("http://localhost:8000/api/tags")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          sessionStorage.setItem('tok', JSON.stringify(result));
+          this.props.closeLogin();
+        },
+        (error) => {
+          alert('Request failure: ', error);
+        }
+      )
     }
 
     handleClick(event) {
@@ -47,10 +64,10 @@ class Login extends Component {
 
     render() {
       return (
-        <div className='login' onClick={this.props.closeLogin}>
+        <div className='login'>
           <div className='login_inner' onClick={this.handleClick}>
             <h1>Login</h1>
-            <form method="get">
+            <form onSubmit={this.handleSubmit.bind(this)}>
               <input type="text" value={this.state.value} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
               <input type="password" value={this.state.pass} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
               <input className="button1" type="submit" value="Login"></input>
