@@ -128,36 +128,6 @@ Headers: Content-Type: application/json, Accept: application/json, Authorization
   
 <!-- response is truncated -->
 
-## GET /api/tags
-
-Gets every RuuviTag's information. Requires api_key. Returns an array.
-
-#### Headers
-Headers: Content-Type: application/json, Accept: application/json, Authorization: Bearer api_key
-
-#### Query Strings
-None
-
-### Example
-
-#### Request GET http://192.168.10.52/api/tags
-
-Headers: Content-Type: application/json, Accept: application/json, Authorization: Bearer QZHLK22lu0xjhW6qXqJ5F2EVdXOYxC8QTq64uFG47KCdF4QrE9ysO4NTeiN1
-
-#### Response:
-200 OK
-[
-  {
-    "RuuviTagId": 212430271652395,
-    "User": "Asdf"
-  },
-    {
-    "RuuviTagId": 237954952203111,
-    "User": "Qwer"
-  },
-  
-<!-- response is truncated -->
-
 ## GET /api/tags/{RuuviTagId}
 
 Gets RuuviTag's information. Requires api_key.
