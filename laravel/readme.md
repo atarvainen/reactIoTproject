@@ -5,11 +5,10 @@
 Registers a new user. Returns visible user information and an initial api_token.
 
 #### Headers
-Content-Type: application/json
-Accept: application/json
+Content-Type: application/json, Accept: application/json.
 
-#### Payload
-string name, string email, string password, string password_confirmation
+#### Required Payload
+string name, string email, string password, string password_confirmation.
 
 ### Example
 
@@ -43,10 +42,10 @@ Payload:
 Logs user in. Returns visible user information and creates a new api_token or overrides an existing one if user hasn't logged out.
 
 #### Headers
-Content-Type: application/json, Accept: application/json
+Content-Type: application/json, Accept: application/json.
 
-#### Payload
-string email, string password
+#### Required Payload
+string email, string password.
 
 ### Example
 
@@ -78,11 +77,11 @@ Payload:
 
 Logs user out and sets the existing api_key to null. Requires api_key.
 
-#### Headers
+#### Required Headers
 Authorization: Bearer api_key
 
 #### Payload
-None
+None.
 
 ### Example
 
@@ -102,11 +101,11 @@ Headers: Authorization: Bearer icK5cgWI4ssi2uEXn62DQ6xa8NwBkSWX9ntN2LJW7pTndShHr
 
 Gets every RuuviTag's information. Requires api_key. Returns an array.
 
-#### Headers
+#### Required Headers
 Headers: Content-Type: application/json, Accept: application/json, Authorization: Bearer api_key
 
 #### Query Strings
-None
+None.
 
 ### Example
 
@@ -126,13 +125,13 @@ Headers: Content-Type: application/json, Accept: application/json, Authorization
     "User": "Qwer"
   },
   
-<!-- response is truncated -->
+Response is truncated.
 
 ## GET /api/tags/{RuuviTagId}
 
 Gets RuuviTag's information. Requires api_key.
 
-#### Headers
+#### Required Headers
 Headers: Content-Type: application/json, Accept: application/json, Authorization: Bearer api_key
 
 #### Query Strings
@@ -155,7 +154,7 @@ Headers: Content-Type: application/json, Accept: application/json, Authorization
 
 Gets RuuviTag's measured data. Requires api_key. Returns an array.
 
-#### Headers
+#### Required Headers
 Headers: Content-Type: application/json, Accept: application/json, Authorization: Bearer api_key
 
 #### Query Strings
@@ -182,5 +181,5 @@ Headers: Content-Type: application/json, Accept: application/json, Authorization
     "Time":"2018-11-16 09:42:11",
     "RuuviTagId":237954952203111
   },
-
-<!-- response is truncated -->
+  
+Response is truncated.
