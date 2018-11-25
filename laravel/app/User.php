@@ -37,4 +37,10 @@ class User extends Authenticatable
         return $this->api_token;
     }
 	
+	public function ruuvitags(){
+		$ruuvitags_users = RuuvitagsUser::where('userid',$this->id)->get();
+		return $ruuvitags_users;
+	}
+
+	
 }

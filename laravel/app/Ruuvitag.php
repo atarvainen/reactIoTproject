@@ -11,20 +11,20 @@ class Ruuvitag extends Model
      *
      * @var string
      */
-    protected $table = 'RuuviTag';
-    protected $primaryKey = 'RuuviTagId';
-    public $incrementing = false;
-    public $timestamps = false;
+    protected $table = 'ruuvitag_user';
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
     */
-    protected $fillable = ['RuuviTagId', 'User'];
+    protected $fillable = ['ruuvitagid', 'userid','tagtouser','tagfromuser'];
     
     // Relation.
-    public function data()
+    public function ruuvitag_user()
     {
         return $this->hasMany(Data::class, 'RuuviTagId');
     }
+	
 }

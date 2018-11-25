@@ -70,34 +70,3 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::delete('tags/{tag}', 'RuuvitagController@delete');
 });
 
-/*
-Route::get('tags', 'RuuvitagController@index');
-
-Route::get('tags/{tag}', 'RuuvitagController@show');
-
-Route::get('tagdata/{tag}', 'RuuvitagController@tagdata');
-
-Route::get('tagtemp/{tag}', 'RuuvitagController@tagtemp');
-
-//Route::get('tagtempdaily/{tag}', 'RuuvitagController@tagtempd');
-
-Route::get('tagtemp/{tag}/day/{day}', 'RuuvitagController@tagtemph');
-
-Route::get('taghum', 'RuuvitagController@taghum');
-
-Route::get('taghumdaily', 'RuuvitagController@taghumd');
-
-Route::get('taghumhourly/{day}', 'RuuvitagController@taghumh');
- 
-Route::post('tags', 'RuuvitagController@store');
- 
-Route::put('tags/{tag}', 'RuuvitagController@update');
- 
-Route::delete('tags/{tag}', 'RuuvitagController@delete');
-
-*/
-
-
-
-
-
