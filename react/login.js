@@ -41,7 +41,10 @@ class Login extends Component {
       })
       .catch((error) => {
         if (error.status === 404) {
-          this.setState({loginFail: true, loginError: "Login service unavailable."});
+          this.setState({loginFail: true, loginError: "Failed connecting to login service."});
+        }
+        else if (error.name === "TypeError") {
+          this.setState({loginFail: true, loginError: "Failed connecting to login service."});
         }
         else {
           error.json().then( err => {this.setState({loginFail: true, loginError: err.message})});
