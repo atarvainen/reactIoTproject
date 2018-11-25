@@ -48,7 +48,29 @@ class Navbar extends Component {
     }
 
     handleLogoutClick() {
-      sessionStorage.clear();
+	  fetch("http://192.168.10.52/api/logout", {
+        method: 'post',
+        headers: {
+			"Accept": "application/json",
+			"Authorization":`Bearer ${sessionStorage.getItem('tok').replace(/"/g,'')}`,
+			},
+      })
+      .then((result) => {
+        if (result.ok) {
+          return result.json();
+        }
+        throw result;
+      })
+      .catch((error) => {
+        if (error.status === 404) {
+         this.setState({loginFail: true, loginError: "Login service unavailable."});
+        }
+        else {
+          //error.json().then( err => {this.setState({loginFail: true, loginError: err.message})});
+		  console.log("navbar logout fetch catch else");
+        }
+      });
+	  sessionStorage.clear();
       this.setState({isLoggedIn: false});
     }
 

@@ -128,7 +128,7 @@ class Logged extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
     };
-    this.fetchData("http://localhost:8000/api/data", "get", headers, e.target.value);
+    this.fetchData("http://192.168.10.52/api/data", "get", headers, e.target.value);
   }
 
   getHum() {

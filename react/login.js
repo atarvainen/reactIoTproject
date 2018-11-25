@@ -17,7 +17,7 @@ class Login extends Component {
 
     handleSubmit(e) {
       e.preventDefault();
-      fetch("http://localhost:8000/api/login", {
+      fetch("http://192.168.10.52/api/login", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
