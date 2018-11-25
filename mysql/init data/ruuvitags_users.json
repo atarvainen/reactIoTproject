@@ -1,0 +1,5 @@
+[{"id":1, "ruuvitagid":212430275022395, "userid":4, "tagtouser":"2018-10-24 20:00:00", "tagfromuser":"", "created_at":"", "updated_at":""},
+ {"id":2, "ruuvitagid":233434952203111, "userid":7, "tagtouser":"2018-10-24 20:00:00", "tagfromuser":"", "created_at":"", "updated_at":""},
+ {"id":3, "ruuvitagid":244290185097070, "userid":8, "tagtouser":"2018-10-24 20:00:00", "tagfromuser":"", "created_at":"", "updated_at":""},
+ {"id":4, "ruuvitagid":257385652260480, "userid":1, "tagtouser":"2018-10-24 20:00:00", "tagfromuser":"", "created_at":"", "updated_at":""},
+ {"id":5, "ruuvitagid":257385652260480, "userid":8, "tagtouser":"2018-11-25 12:58:51", "tagfromuser":"", "created_at":"", "updated_at":""}]
