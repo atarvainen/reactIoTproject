@@ -94,31 +94,31 @@ class Logged extends Component {
         throw result;
       })
     .then((result) => {
-            this.setState({
-            data: {
-                labels: result.map(x => x.Time),
-                datasets: [
-                    {
-                        label: "Tag",
-                        backgroundColor: "rgba(0,0,0,0.8)",
-                        data: result.map(x => x.Temp)
-                    }
-                ]
-            },
-            isLoaded: true,
-            axisy: result.map(x => x.Time),
-            axisx: result.map(x => x.Temp),
-            chartChoice: chartChoice
-            });
-        })
-        .catch((error) => {
-            if (error.status === 404) {
-              this.setState({loginFail: true, loginError: "Login service unavailable."});
-            }
-            else {
-              error.json().then( err => {this.setState({loginFail: true, loginError: err.message})});
-            }
+        this.setState({
+        data: {
+            labels: result.map(x => x.Time),
+            datasets: [
+                {
+                    label: "Tag",
+                    backgroundColor: "rgba(0,0,0,0.8)",
+                    data: result.map(x => x.Temp)
+                }
+            ]
+        },
+        isLoaded: true,
+        axisy: result.map(x => x.Time),
+        axisx: result.map(x => x.Temp),
+        chartChoice: chartChoice
         });
+    })
+    .catch((error) => {
+        if (error.name === "TypeError") {
+            alert("Failed connecting to login service.");
+        }
+        else {
+            error.json().then( err => {alert(err.error)});
+        }
+    });
   }
 
   getTemp(e) {
