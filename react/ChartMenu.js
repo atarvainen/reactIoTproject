@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-//Check for login and render appropriate view
 class ChartMenu extends Component {
     constructor(props) {
         super(props);
@@ -21,24 +20,27 @@ class ChartMenu extends Component {
     }
 
     toggleAttMenu(e) {
-        e.stopPropagation();
-
+        if (this.state.showAttMenu === false) {
+            this.props.getData(e.target.value);
+        }
         this.setState({
             showAttMenu: !this.state.showAttMenu
         });
     }
 
     toggleHumMenu(e) {
-        e.stopPropagation();
-
+        if (this.state.showHumMenu === false) {
+            this.props.getData(e.target.value);
+        }
         this.setState({
             showHumMenu: !this.state.showHumMenu
         });
     }
 
     toggleTempMenu(e) {
-        e.stopPropagation();
-
+        if (this.state.showTempMenu === false) {
+            this.props.getData(e.target.value);
+        }
         this.setState({
             showTempMenu: !this.state.showTempMenu
         });
@@ -47,30 +49,30 @@ class ChartMenu extends Component {
     render() {
         return (
             <div>
-                <button className="button1" onClick={this.toggleAttMenu}>Läsnäolo</button>
+                <button className="button1" value="Att" onClick={this.toggleAttMenu}>Läsnäolo</button>
                 {this.state.showAttMenu ?
                     <div>
-                        <button value="BarChart" onClick={this.props.getAtt}>Bar chart</button>
-                        <button value="LineChart" onClick={this.props.getAtt}>Line chart</button>
-                        <button value="DoughnutChart" onClick={this.props.getAtt}>Doughnut chart</button>
+                        <button value="BarChart" onClick={this.props.chartChoice}>Bar chart</button>
+                        <button value="LineChart" onClick={this.props.chartChoice}>Line chart</button>
+                        <button value="DoughnutChart" onClick={this.props.chartChoice}>Doughnut chart</button>
                     </div>
                     : null
                 }
-                <button className="button1" onClick={this.toggleTempMenu}>Lämpötila</button>
+                <button className="button1" value="Temp" onClick={this.toggleTempMenu}>Lämpötila</button>
                 {this.state.showTempMenu ?
                     <div>
-                        <button value="BarChart" onClick={this.props.getTemp}>Bar chart</button>
-                        <button value="LineChart" onClick={this.props.getTemp}>Line chart</button>
-                        <button value="DoughnutChart" onClick={this.props.getTemp}>Doughnut chart</button>
+                        <button value="BarChart" onClick={this.props.chartChoice}>Bar chart</button>
+                        <button value="LineChart" onClick={this.props.chartChoice}>Line chart</button>
+                        <button value="DoughnutChart" onClick={this.props.chartChoice}>Doughnut chart</button>
                     </div>
                     : null
                 }
-                <button className="button1" onClick={this.toggleHumMenu}>Kosteus</button>
+                <button className="button1" value="Hum" onClick={this.toggleHumMenu}>Kosteus</button>
                 {this.state.showHumMenu ?
                     <div>
-                        <button value="BarChart" onClick={this.props.getHum}>Bar chart</button>
-                        <button value="LineChart" onClick={this.props.getHum}>Line chart</button>
-                        <button value="DoughnutChart" onClick={this.props.getHum}>Doughnut chart</button>
+                        <button value="BarChart" onClick={this.props.chartChoice}>Bar chart</button>
+                        <button value="LineChart" onClick={this.props.chartChoice}>Line chart</button>
+                        <button value="DoughnutChart" onClick={this.props.chartChoice}>Doughnut chart</button>
                     </div>
                     : null
                 }

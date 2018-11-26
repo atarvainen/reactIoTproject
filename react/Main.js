@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import BarChart from './Bar';
-import DoughnutChart from './Doughnut';
-import LineChart from './Line';
 import Navbar from './Navbar';
 import Settings from './Settings';
 import ChartMenu from './ChartMenu';
 import { ip } from './ServerConf';
+import WebWorker from './WebWorker';
+import ChartWorker from './ChartWorker';
+import BarChart from './Bar';
+import DoughnutChart from './Doughnut';
+import LineChart from './Line';
 
 class Main extends Component {
     constructor(props) {
@@ -15,9 +17,9 @@ class Main extends Component {
             user: props.user,
             token: props.token,
             isLoggedIn: props.isLoggedIn,
-            barData: {},
-            lineData: {},
-            doughnutData: {},
+            data: {
+                title: ""
+            },
             error: null,
             isLoaded: false,
             axisy: [],
@@ -27,18 +29,31 @@ class Main extends Component {
             showTempMenu: false,
             showHumMenu: false,
             chartChoice: "",
-            title: ""
         }
         this.toggleSettings = this.toggleSettings.bind(this);
-        this.getHum = this.getHum.bind(this);
-        this.getTemp = this.getTemp.bind(this);
-        this.getAtt = this.getAtt.bind(this);
+        this.getData = this.getData.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+        this.createCharts = this.createCharts.bind(this);
+        this.handleChartChoice = this.handleChartChoice.bind(this);
     }
 
-    fetchData(url, method, headers, chartChoice, title) {
+    componentDidMount() {
+    }
+
+    createCharts() {
+        this.worker = new WebWorker(ChartWorker);
+
+        this.worker.addEventListener('message', event => {
+            const data = event.data;
+            console.log(data);
+        });
+
+        this.worker.postMessage(this.state.data);
+    }
+
+    fetchData(url, method, headers, title) {
         fetch(url, {
             method: method,
             headers: headers
@@ -59,56 +74,36 @@ class Main extends Component {
                                 backgroundColor: "rgba(0,0,0,0.8)",
                                 data: result.map(x => x.Temp)
                             }
-                        ]
+                        ],
+                        title: title
                     },
                     isLoaded: true,
                     axisy: result.map(x => x.Time),
                     axisx: result.map(x => x.Temp),
-                    chartChoice: chartChoice,
-                    title: title
                 });
             })
             .catch((error) => {
                 if (error.name === "TypeError") {
-                    alert("Failed connecting to login service.");
+                    alert("Failed fetching");
                 }
                 else {
+                    console.log("error", error);
                     error.json().then(err => { alert(err.error) });
                 }
             });
     }
 
-    getTemp(e) {
-        console.log("getting temp");
-        console.log(e.target.value);
-        let headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
-        };
-        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e.target.value, "Temp");
+    handleChartChoice(e) {
+        this.setState({ chartChoice: e.target.value })
     }
 
-    getHum(e) {
-        console.log("getting humidity");
-        console.log(e.target.value);
+    getData(e) {
         let headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
         };
-        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e.target.value, "Humidity");
-    }
-
-    getAtt(e) {
-        console.log("getting attendance");
-        console.log(e.target.value);
-        let headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
-        };
-        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e.target.value, "Attendance");
+        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e);
     }
 
     toggleSettings() {
@@ -124,26 +119,27 @@ class Main extends Component {
     }
 
     render() {
+        console.log(this.state.chartChoice);
         let ChartType;
         let chart;
         let chartMenu;
 
-        if (this.state.chartChoice === "BarChart") {
+        if (this.state.chartChoice !== "" && this.state.chartChoice === "BarChart") {
             ChartType = BarChart;
         }
-        else if (this.state.chartChoice === "LineChart") {
+        else if (this.state.chartChoice !== "" && this.state.chartChoice === "LineChart") {
             ChartType = LineChart;
         }
-        else if (this.state.chartChoice === "DoughnutChart") {
+        else if (this.state.chartChoice !== "" && this.state.chartChoice === "DoughnutChart") {
             ChartType = DoughnutChart;
         }
 
-        if (this.state.isLoaded) {
+        if (this.state.chartChoice !== "" && this.state.isLoaded) {
             chart = <ChartType data={this.state.data} title={this.state.title} legendPosition="bottom" />
         }
 
         if (this.state.isLoggedIn) {
-            chartMenu = <ChartMenu getTemp={this.getTemp} getHum={this.getHum} getAtt={this.getAtt} />
+            chartMenu = <ChartMenu chartChoice={this.handleChartChoice} getData={this.getData} />
         }
         else {
             chartMenu = <p>Please login or register to view data.</p>
