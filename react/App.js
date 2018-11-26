@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import Logged from './Logged';
+import Main from './Main';
 
 //Check for login and render appropriate view
 class App extends Component {
 
   render() {
     if (sessionStorage.getItem('nam') === null) {
-      console.log(sessionStorage.getItem('nam'));
       return (
-        <Logged isLoggedIn={false}/>
+        <Main isLoggedIn={false} />
       );
     }
     else {
       return (
-        <Logged isLoggedIn={true} user={sessionStorage.getItem('nam')} token={sessionStorage.getItem('tok')}/>
+        <Main isLoggedIn={true} user={sessionStorage.getItem('nam')} token={sessionStorage.getItem('tok')} />
       )
     }
   }

@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class Login extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        value: "Email",
-        pass: "password",
-        loginFail: false,
-        loginError: ""
-      }
-      this.handleClick = this.handleClick.bind(this);
-      this.handleFocus = this.handleFocus.bind(this);
-      this.handleChange = this.handleChange.bind(this);
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "Email",
+      pass: "password",
+      loginFail: false,
+      loginError: ""
     }
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-    handleSubmit(e) {
-      e.preventDefault();
-      fetch("http://192.168.10.52/api/login", {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: this.state.value,
-          password: this.state.pass
-        })
+  handleSubmit(e) {
+    e.preventDefault();
+    fetch("http://localhost:8000/api/login", {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.value,
+        password: this.state.pass
       })
+    })
       .then((result) => {
         if (result.ok) {
           return result.json();
@@ -35,76 +35,76 @@ class Login extends Component {
         throw result;
       })
       .then((result) => {
-          sessionStorage.setItem('tok', JSON.stringify(result.data.api_token));
-          sessionStorage.setItem('nam', JSON.stringify(result.data.name));
-          this.props.handleLogin();
+        sessionStorage.setItem('tok', JSON.stringify(result.data.api_token));
+        sessionStorage.setItem('nam', JSON.stringify(result.data.name));
+        this.props.handleLogin();
       })
       .catch((error) => {
         if (error.status === 404) {
-          this.setState({loginFail: true, loginError: "Failed connecting to login service."});
+          this.setState({ loginFail: true, loginError: "Failed connecting to login service." });
         }
         else if (error.name === "TypeError") {
-          this.setState({loginFail: true, loginError: "Failed connecting to login service."});
+          this.setState({ loginFail: true, loginError: "Failed connecting to login service." });
         }
         else {
-          error.json().then( err => {this.setState({loginFail: true, loginError: err.message})});
+          error.json().then(err => { this.setState({ loginFail: true, loginError: err.message }) });
         }
       });
-    }
+  }
 
-    handleClick(event) {
-      event.stopPropagation();
-    }
+  handleClick(event) {
+    event.stopPropagation();
+  }
 
-    handleFocus(a) {
-      if(a.target.type === "text") {
-        if (this.state.value === "Email"){
-          this.setState({value: ""});
-        }
-        else if (this.state.value === ""){
-          this.setState({value: "Email"});
-        }
+  handleFocus(a) {
+    if (a.target.type === "text") {
+      if (this.state.value === "Email") {
+        this.setState({ value: "" });
       }
-      else {
-        if (this.state.pass === "password"){
-          this.setState({pass: ""});
-        }
-        else if (this.state.pass === ""){
-          this.setState({pass: "password"});
-        }
+      else if (this.state.value === "") {
+        this.setState({ value: "Email" });
       }
     }
-
-    handleChange(a) {
-      if(a.target.type === "text") {
-        this.setState({value: a.target.value});
+    else {
+      if (this.state.pass === "password") {
+        this.setState({ pass: "" });
       }
-      else {
-        this.setState({pass: a.target.value});
+      else if (this.state.pass === "") {
+        this.setState({ pass: "password" });
       }
     }
+  }
 
-    render() {
+  handleChange(a) {
+    if (a.target.type === "text") {
+      this.setState({ value: a.target.value });
+    }
+    else {
+      this.setState({ pass: a.target.value });
+    }
+  }
+
+  render() {
     let p;
 
     if (this.state.loginFail) {
       p = <p id='error'>{this.state.loginError}</p>;
     }
     return (
-        <div className='login' onClick={this.props.closeLogin}>
-          <div className='login_inner' onClick={this.handleClick}>
-            <h1>Login</h1>
-            {p}
-            <form onSubmit={this.handleSubmit.bind(this)}>
-              <input type="text" value={this.state.value} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
-              <input type="password" value={this.state.pass} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
-              <input className="button1" type="submit" value="Login"></input>
-              <button className="button1" onClick={this.props.closeLogin}>Close</button>
-            </form>
-          </div>
+      <div className='login' onClick={this.props.closeLogin}>
+        <div className='login_inner' onClick={this.handleClick}>
+          <h1>Login</h1>
+          {p}
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <input type="text" value={this.state.value} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
+            <input type="password" value={this.state.pass} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
+            <input className="button1" type="submit" value="Login"></input>
+            <button className="button1" onClick={this.props.closeLogin}>Close</button>
+          </form>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 export default Login;

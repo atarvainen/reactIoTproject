@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './login';
+import Login from './Login';
+import Register from './Register';
 
 function LoginButton(props) {
   return (
     <button className="button1" onClick={props.onClick}>Login</button>
+  );
+}
+
+function RegisterButton(props) {
+  return (
+    <button className="button1" onClick={props.onClick}>Register</button>
   );
 }
 
@@ -19,13 +26,16 @@ class Navbar extends Component {
     super(props);
     this.state = {
       showLogin: false,
+      showRegister: false,
       isLoggedIn: props.isLoggedIn,
       user: props.user,
       token: props.token
     }
+    this.handleRegisterClick = this.handleRegisterClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
     this.toggleLogin = this.toggleLogin.bind(this);
+    this.toggleRegister = this.toggleRegister.bind(this);
   }
 
   handleLoginClick() {
@@ -35,6 +45,17 @@ class Navbar extends Component {
       token: sessionStorage.getItem("tok"),
       showLogin: !this.state.showLogin
     });
+    this.props.login();
+  }
+
+  handleRegisterClick() {
+    this.setState({
+      isLoggedIn: true,
+      user: sessionStorage.getItem("nam"),
+      token: sessionStorage.getItem("tok"),
+      showRegister: !this.state.showRegister
+    });
+    this.props.login();
   }
 
   toggleLogin() {
@@ -43,12 +64,18 @@ class Navbar extends Component {
     });
   }
 
+  toggleRegister() {
+    this.setState({
+      showRegister: !this.state.showRegister
+    });
+  }
+
   clear() {
     this.value = '';
   }
 
   handleLogoutClick() {
-    fetch("http://192.168.10.52/api/logout", {
+    fetch("http://localhost:8000/api/logout", {
       method: 'post',
       headers: {
         "Accept": "application/json",
@@ -74,18 +101,20 @@ class Navbar extends Component {
       });
     sessionStorage.clear();
     this.setState({ isLoggedIn: false });
+    this.props.logout();
   }
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
     let button;
-    let span;
+    let button2;
 
     if (isLoggedIn) {
       button = <LogoutButton onClick={this.handleLogoutClick} />;
-      span = <span id="username" onClick={this.props.toggleSettings}>{sessionStorage.getItem("nam")}</span>
+      button2 = <span id="username" onClick={this.props.toggleSettings}>{sessionStorage.getItem("nam").replace(/"/g, '')}</span>
     } else {
       button = <LoginButton onClick={this.toggleLogin} />;
+      button2 = <RegisterButton onClick={this.toggleRegister} />;
     }
     return (
       <div id="nav">
@@ -95,7 +124,11 @@ class Navbar extends Component {
             <Login clear={this.clear.bind(this)} closeLogin={this.toggleLogin} handleLogin={this.handleLoginClick} />
             : null
           }
-          {span}
+          {this.state.showRegister ?
+            <Register clear={this.clear.bind(this)} closeRegister={this.toggleRegister} handleRegister={this.handleRegisterClick} />
+            : null
+          }
+          {button2}
           {button}
         </div>
       </div>

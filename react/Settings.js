@@ -15,8 +15,8 @@ class Settings extends Component {
         return (
             <div className='settings' onClick={this.props.closeSettings}>
                 <div className='settings_inner' onClick={this.handleClick}>
-                <h1>Helou this is settings</h1>
-                <button className="button1" onClick={this.props.closeSettings}>Close</button>
+                    <h1>Helou this is settings</h1>
+                    <button className="button1" onClick={this.props.closeSettings}>Close</button>
                 </div>
             </div>
         )
