@@ -54,17 +54,24 @@ Route::put('data/{data}', 'DataController@update');
 Route::delete('data/{data}', 'DataController@delete');
 
 //Ruuvitag routes
+/*
+hourly
 
+tagtemp/tagi?day&showasHourly=true
+
+daily
+tagtemp/tagi&day
+*/
 Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('tags', 'RuuvitagController@index'); 
 	Route::get('tags/{tag}', 'RuuvitagController@show');
 	Route::get('tagdata/{tag}', 'RuuvitagController@tagdata');
 	Route::get('tagtemp/{tag}', 'RuuvitagController@tagtemp');
 	//Route::get('tagtempdaily/{tag}', 'RuuvitagController@tagtempd');
-	Route::get('tagtemp/{tag}/day/{day}', 'RuuvitagController@tagtemph');
-	Route::get('taghum', 'RuuvitagController@taghum');
-	Route::get('taghumdaily', 'RuuvitagController@taghumd');
-	Route::get('taghumhourly/{day}', 'RuuvitagController@taghumh');
+	Route::get('tagtemp/{tag}{day}', 'RuuvitagController@tagtemph');
+	Route::get('taghum/{tag}', 'RuuvitagController@taghum');
+	Route::get('taghum/{tag}/day/{day}', 'RuuvitagController@taghumd');
+	//Route::get('taghumhourly/{day}', 'RuuvitagController@taghumh');
 	Route::post('tags', 'RuuvitagController@store');
 	Route::put('tags/{tag}', 'RuuvitagController@update');
 	Route::delete('tags/{tag}', 'RuuvitagController@delete');

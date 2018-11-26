@@ -77,8 +77,7 @@ class RuuvitagController extends Controller
     {
         $taga = Ruuvitag::find($tag);
         
-        $data = $taga->data()->select('Temp', 'Time')->get();
-        
+        $data = $taga->data()->selectRaw('Temp, cast(Time as time) as Time')->where('Time', 'like', $day)->get();
         echo $data;
     }
     
@@ -87,7 +86,7 @@ class RuuvitagController extends Controller
         //SELECT [activity_dt], count(*) FROM table1 GROUP BY hour( activity_dt ) , day( activity_dt )
         
         $day = $day . '%';
-        
+
         //select `Temp`, `CAST(Time` as `day)` from `Data`
         
         //select `Temp`, `CAST(Time` as `day)` from `Data`
@@ -99,8 +98,9 @@ class RuuvitagController extends Controller
         //>whereDate('created_at', '2016-12-31')
         //select('Temp', CAST(Time AS day))
         //selectRaw('Temp, * CAST(Time AS day)')
+        //SELECT DISTINCT Temp, EXTRACT(HOUR FROM Time) FROM Data WHERE Time like "2018-11-21%"
         
-        $data = $taga->data()->selectRaw('Temp, cast(Time as time) as Time')->where('Time', 'like', $day)->get();
+        $data = $taga->data()->selectRaw('DISTINCT Temp, EXTRACT(HOUR FROM Time) as Time')->where('Time', 'like', $day)->get();
         
         echo $data;
     }
@@ -109,7 +109,7 @@ class RuuvitagController extends Controller
     {
         $taga = Ruuvitag::find($tag);
         
-        $data = $taga->data()->select('Temp', 'Time')->get();
+        $data = $taga->data()->select('Humidity', 'Time')->get();
         
         echo $data;
     }
