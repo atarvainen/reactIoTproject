@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { ip } from './ServerConf';
 
 class Login extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:8000/api/login", {
+    fetch(("http://" + ip + "/api/login"), { //Muokattu alkuperäinen: "http://localhost:8000/api/login"
       method: 'post',
       headers: {
         'Accept': 'application/json',

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { ip } from './ServerConf';
 
 class Register extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class Register extends Component {
     handleSubmit(e) {
         e.preventDefault();
         if (this.state.pass === this.state.passConf) {
-            fetch("http://localhost:8000/api/register", {
+            fetch(("http://" + ip + "/api/register"), {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',

@@ -6,6 +6,7 @@ import LineChart from './Line';
 import Navbar from './Navbar';
 import Settings from './Settings';
 import ChartMenu from './ChartMenu';
+import { ip } from './ServerConf';
 
 class Main extends Component {
     constructor(props) {
@@ -85,7 +86,7 @@ class Main extends Component {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
         };
-        this.fetchData("http://localhost:8000/api/data", "get", headers, e.target.value, "Temp");
+        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e.target.value, "Temp");
     }
 
     getHum(e) {
@@ -96,7 +97,7 @@ class Main extends Component {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
         };
-        this.fetchData("http://localhost:8000/api/data", "get", headers, e.target.value, "Humidity");
+        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e.target.value, "Humidity");
     }
 
     getAtt(e) {
@@ -107,7 +108,7 @@ class Main extends Component {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
         };
-        this.fetchData("http://localhost:8000/api/data", "get", headers, e.target.value, "Attendance");
+        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e.target.value, "Attendance");
     }
 
     toggleSettings() {

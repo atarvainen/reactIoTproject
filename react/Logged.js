@@ -5,6 +5,7 @@ import DoughnutChart from './Doughnut';
 import LineChart from './Line';
 import Navbar from './Navbar';
 import Settings from './Settings';
+import { ip } from './ServerConf';
 
 class Logged extends Component {
     constructor(props) {
@@ -105,7 +106,7 @@ class Logged extends Component {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`,
         };
-        this.fetchData("http://localhost:8000/api/tags", "get", headers, e.target.value);
+        this.fetchData(("http://" + ip + "/api/tags"), "get", headers, e.target.value); //muokattu alkuperäinen: http://localhost:8000/api/tags
     }
 
     getHum() {

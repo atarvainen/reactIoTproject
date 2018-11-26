@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from './Login';
 import Register from './Register';
+import { ip } from './ServerConf';
 
 function LoginButton(props) {
   return (
@@ -75,7 +76,7 @@ class Navbar extends Component {
   }
 
   handleLogoutClick() {
-    fetch("http://localhost:8000/api/logout", {
+    fetch(("http://" + ip + "/api/logout"), {  //Muokattu alkuperäinen: http://localhost:8000/api/logout
       method: 'post',
       headers: {
         "Accept": "application/json",
