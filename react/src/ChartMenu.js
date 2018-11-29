@@ -20,59 +20,89 @@ class ChartMenu extends Component {
     }
 
     toggleAttMenu(e) {
-        if (this.state.showAttMenu === false) {
-            this.props.getData(e.target.value);
+        if (e.target.value !== "Att") {
+            this.props.chartChoice(e.target.value);
+            this.setState({
+                showAttMenu: !this.state.showAttMenu,
+                showTempMenu: false,
+                showHumMenu: false
+            });
         }
-        this.setState({
-            showAttMenu: !this.state.showAttMenu
-        });
+        else {
+            this.setState({
+                showAttMenu: !this.state.showAttMenu,
+                showTempMenu: false,
+                showHumMenu: false
+            });
+            this.props.dataChoice(e.target.value);
+        }
     }
 
     toggleHumMenu(e) {
-        if (this.state.showHumMenu === false) {
-            this.props.getData(e.target.value);
+        if (e.target.value !== "Hum") {
+            this.props.chartChoice(e.target.value);
+            this.setState({
+                showHumMenu: !this.state.showHumMenu,
+                showAttMenu: false,
+                showTempMenu: false
+            });
         }
-        this.setState({
-            showHumMenu: !this.state.showHumMenu
-        });
+        else {
+            this.setState({
+                showHumMenu: !this.state.showHumMenu,
+                showAttMenu: false,
+                showTempMenu: false
+            });
+            this.props.dataChoice(e.target.value);
+        }
     }
 
     toggleTempMenu(e) {
-        if (this.state.showTempMenu === false) {
-            this.props.getData(e.target.value);
+        if (e.target.value !== "Temp") {
+            this.props.chartChoice(e.target.value);
+            this.setState({
+                showTempMenu: !this.state.showTempMenu,
+                showAttMenu: false,
+                showHumMenu: false
+            });
         }
-        this.setState({
-            showTempMenu: !this.state.showTempMenu
-        });
+        else {
+            this.setState({
+                showTempMenu: !this.state.showTempMenu,
+                showAttMenu: false,
+                showHumMenu: false
+            });
+            this.props.dataChoice(e.target.value);
+        }
     }
 
     render() {
         return (
             <div>
-                <button className="button1" value="Att" onClick={this.toggleAttMenu}>Läsnäolo</button>
+                <button className="dropdown button1" value="Att" onClick={this.toggleAttMenu}>Läsnäolo</button>
                 {this.state.showAttMenu ?
-                    <div>
-                        <button value="BarChart" onClick={this.props.chartChoice}>Bar chart</button>
-                        <button value="LineChart" onClick={this.props.chartChoice}>Line chart</button>
-                        <button value="DoughnutChart" onClick={this.props.chartChoice}>Doughnut chart</button>
+                    <div className="dropdown-content">
+                        <button className="button1" value="BarChart" onClick={this.toggleAttMenu}>Bar chart</button>
+                        <button className="button1" value="LineChart" onClick={this.toggleAttMenu}>Line chart</button>
+                        <button className="button1" value="DoughnutChart" onClick={this.toggleAttMenu}>Doughnut chart</button>
                     </div>
                     : null
                 }
-                <button className="button1" value="Temp" onClick={this.toggleTempMenu}>Lämpötila</button>
+                <button className="dropdown button1" value="Temp" onClick={this.toggleTempMenu}>Lämpötila</button>
                 {this.state.showTempMenu ?
-                    <div>
-                        <button value="BarChart" onClick={this.props.chartChoice}>Bar chart</button>
-                        <button value="LineChart" onClick={this.props.chartChoice}>Line chart</button>
-                        <button value="DoughnutChart" onClick={this.props.chartChoice}>Doughnut chart</button>
+                    <div className="dropdown-content">
+                        <button className="button1" value="BarChart" onClick={this.toggleTempMenu}>Bar chart</button>
+                        <button className="button1" value="LineChart" onClick={this.toggleTempMenu}>Line chart</button>
+                        <button className="button1" value="DoughnutChart" onClick={this.toggleTempMenu}>Doughnut chart</button>
                     </div>
                     : null
                 }
-                <button className="button1" value="Hum" onClick={this.toggleHumMenu}>Kosteus</button>
+                <button className="dropdown button1" value="Hum" onClick={this.toggleHumMenu}>Kosteus</button>
                 {this.state.showHumMenu ?
-                    <div>
-                        <button value="BarChart" onClick={this.props.chartChoice}>Bar chart</button>
-                        <button value="LineChart" onClick={this.props.chartChoice}>Line chart</button>
-                        <button value="DoughnutChart" onClick={this.props.chartChoice}>Doughnut chart</button>
+                    <div className="dropdown-content">
+                        <button className="button1" value="BarChart" onClick={this.toggleHumMenu}>Bar chart</button>
+                        <button className="button1" value="LineChart" onClick={this.toggleHumMenu}>Line chart</button>
+                        <button className="button1" value="DoughnutChart" onClick={this.toggleHumMenu}>Doughnut chart</button>
                     </div>
                     : null
                 }

@@ -23,7 +23,7 @@ class DoughnutChart extends Component {
                     options={{
                         title: {
                             display: this.props.displayTitle,
-                            text: this.props.data.title,
+                            text: this.state.data.title,
                             fontSize: 25
                         },
                         legend: {

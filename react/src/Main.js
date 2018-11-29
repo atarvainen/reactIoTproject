@@ -3,12 +3,10 @@ import './App.css';
 import Navbar from './Navbar';
 import Settings from './Settings';
 import ChartMenu from './ChartMenu';
-import { ip } from './ServerConf';
-import WebWorker from './WebWorker';
-import ChartWorker from './ChartWorker';
 import BarChart from './Bar';
 import DoughnutChart from './Doughnut';
 import LineChart from './Line';
+import loading from './loader.gif';
 
 class Main extends Component {
     constructor(props) {
@@ -17,11 +15,13 @@ class Main extends Component {
             user: props.user,
             token: props.token,
             isLoggedIn: props.isLoggedIn,
-            data: {
-                title: ""
-            },
+            attData: {},
+            tempData: {},
+            humData: {},
             error: null,
-            isLoaded: false,
+            attIsLoaded: false,
+            tempIsLoaded: false,
+            humIsLoaded: false,
             axisy: [],
             axisx: [],
             showSettings: false,
@@ -29,81 +29,34 @@ class Main extends Component {
             showTempMenu: false,
             showHumMenu: false,
             chartChoice: "",
+            dataChoice: ""
         }
         this.toggleSettings = this.toggleSettings.bind(this);
-        this.getData = this.getData.bind(this);
-        this.fetchData = this.fetchData.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
-        this.createCharts = this.createCharts.bind(this);
         this.handleChartChoice = this.handleChartChoice.bind(this);
+        this.handleDataChoice = this.handleDataChoice.bind(this);
+        this.handleChartData = this.handleChartData.bind(this);
     }
 
-    componentDidMount() {
-    }
-
-    createCharts() {
-        this.worker = new WebWorker(ChartWorker);
-
-        this.worker.addEventListener('message', event => {
-            const data = event.data;
-            console.log(data);
-        });
-
-        this.worker.postMessage(this.state.data);
-    }
-
-    fetchData(url, method, headers, title) {
-        fetch(url, {
-            method: method,
-            headers: headers
-        })
-            .then((result) => {
-                if (result.ok) {
-                    return result.json();
-                }
-                throw result;
-            })
-            .then((result) => {
-                this.setState({
-                    data: {
-                        labels: result.map(x => x.Time),
-                        datasets: [
-                            {
-                                label: "Time",
-                                backgroundColor: "rgba(0,0,0,0.8)",
-                                data: result.map(x => x.Temp)
-                            }
-                        ],
-                        title: title
-                    },
-                    isLoaded: true,
-                    axisy: result.map(x => x.Time),
-                    axisx: result.map(x => x.Temp),
-                });
-            })
-            .catch((error) => {
-                if (error.name === "TypeError") {
-                    alert("Failed fetching");
-                }
-                else {
-                    console.log("error", error);
-                    error.json().then(err => { alert(err.error) });
-                }
-            });
+    handleChartData(e) {
+        if (e.data.title === "Temp") {
+            this.setState({ tempData: e.data, tempIsLoaded: true })
+        }
+        else if (e.data.title === "Att") {
+            this.setState({ attData: e.data, attIsLoaded: true })
+        }
+        else {
+            this.setState({ humData: e.data, humIsLoaded: true })
+        }
     }
 
     handleChartChoice(e) {
-        this.setState({ chartChoice: e.target.value })
+        this.setState({ chartChoice: e })
     }
 
-    getData(e) {
-        let headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
-        };
-        this.fetchData(("http://" + ip + "/api/tagtemp/257385652260480/day/2018-11-24"), "get", headers, e);
+    handleDataChoice(e) {
+        this.setState({ dataChoice: e })
     }
 
     toggleSettings() {
@@ -111,7 +64,12 @@ class Main extends Component {
     }
 
     handleLogout() {
-        this.setState({ isLoggedIn: false, isLoaded: false });
+        this.setState({ 
+            isLoggedIn: false, 
+            attIsLoaded: false,
+            tempIsLoaded: false,
+            humIsLoaded: false,
+        });
     }
 
     handleLogin() {
@@ -119,28 +77,42 @@ class Main extends Component {
     }
 
     render() {
-        console.log(this.state.chartChoice);
         let ChartType;
         let chart;
         let chartMenu;
 
-        if (this.state.chartChoice !== "" && this.state.chartChoice === "BarChart") {
+        if (this.state.chartChoice === "BarChart") {
             ChartType = BarChart;
         }
-        else if (this.state.chartChoice !== "" && this.state.chartChoice === "LineChart") {
+        else if (this.state.chartChoice === "LineChart") {
             ChartType = LineChart;
         }
-        else if (this.state.chartChoice !== "" && this.state.chartChoice === "DoughnutChart") {
+        else if (this.state.chartChoice === "DoughnutChart") {
             ChartType = DoughnutChart;
         }
-
-        if (this.state.chartChoice !== "" && this.state.isLoaded) {
-            chart = <ChartType data={this.state.data} title={this.state.title} legendPosition="bottom" />
+        
+        if (this.state.chartChoice !== "") {
+            if (this.state.dataChoice === "Temp" && this.state.tempIsLoaded) {
+                chart = <ChartType data={this.state.tempData} title={this.state.tempData.title} legendPosition="bottom" />
+            }
+            else if (this.state.dataChoice === "Att" && this.state.attIsLoaded) {
+                chart = <ChartType data={this.state.attData} title={this.state.attData.title} legendPosition="bottom" />
+            }
+            else if (this.state.dataChoice === "Hum" && this.state.humIsLoaded) {
+                chart = <ChartType data={this.state.humData} title={this.state.humData.title} legendPosition="bottom" />
+            }
+            else if (this.state.dataChoice !== "") {
+                chart = <img src={loading} alt="Loading..."></img>
+            }
+        }
+        else {
+            chart = null;
         }
 
         if (this.state.isLoggedIn) {
-            chartMenu = <ChartMenu chartChoice={this.handleChartChoice} getData={this.getData} />
+            chartMenu = <ChartMenu dataChoice={this.handleDataChoice} chartChoice={this.handleChartChoice} getData={this.getData} />
         }
+
         else {
             chartMenu = <p>Please login or register to view data.</p>
         }
@@ -148,7 +120,7 @@ class Main extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    <Navbar login={this.handleLogin} logout={this.handleLogout} toggleSettings={this.toggleSettings} isLoggedIn={this.state.isLoggedIn} user={this.state.user} token={this.state.token} settings={this.handleSettingsClick} />
+                    <Navbar handleChartData={this.handleChartData} login={this.handleLogin} logout={this.handleLogout} toggleSettings={this.toggleSettings} isLoggedIn={this.state.isLoggedIn} user={this.state.user} token={this.state.token} settings={this.handleSettingsClick} />
                 </header>
                 {this.state.showSettings ?
                     <Settings closeSettings={this.toggleSettings} />

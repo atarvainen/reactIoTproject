@@ -32,6 +32,9 @@
   background-color: rgba(0,0,0, 0.5);
   z-index: 0;
 }
+img {
+  height: 20px;
+}
 .login_inner {
   position: absolute;
   left: 25%;
@@ -76,8 +79,6 @@
   border-radius:0.2em;
   box-sizing: border-box;
   text-decoration:none;
-  font-family:'Roboto',sans-serif;
-  font-weight:300;
   color:rgb(0, 0, 0);
   background-color: rgb(132, 118, 255);
   text-align: center;
@@ -103,4 +104,23 @@
 .login_inner input[type="password"]{
   width: 100%;
   margin-bottom: 0.5em;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: inline;
+  z-index: 1;
+}
+
+.dropdown-content .button1 {
+  background-color: rgb(145, 139, 190);
+  margin: 0 0.2em 0 0.2em;
+  padding:0.1em 0.5em;
+}
+
+.dropdown-content button:hover {
+  background-color: #6669ff;
 }

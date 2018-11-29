@@ -122,7 +122,7 @@ class Navbar extends Component {
         <h1 id="title">Relaamo Ruuvitag</h1>
         <div id="info">
           {this.state.showLogin ?
-            <Login clear={this.clear.bind(this)} closeLogin={this.toggleLogin} handleLogin={this.handleLoginClick} />
+            <Login handleChartData={this.props.handleChartData} clear={this.clear.bind(this)} closeLogin={this.toggleLogin} handleLogin={this.handleLoginClick} />
             : null
           }
           {this.state.showRegister ?
