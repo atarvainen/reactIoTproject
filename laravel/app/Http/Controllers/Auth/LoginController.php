@@ -46,10 +46,10 @@ class LoginController extends Controller
 
 		if ($this->attemptLogin($request)) {
 			$user = $this->guard()->user();
-			$user->generateToken();
+			$api_key = $user->generateToken();
 			
 			return response()->json([
-				'data' => $user->toArray(), 'ruuvitags' => $user->ruuvitags(),
+				'data' => $user->toArray(), 'api_token' => $api_key, 'ruuvitags' => $user->ruuvitags()->toArray(),
 			]);
 		}
 

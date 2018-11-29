@@ -103,7 +103,7 @@ class Main extends Component {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
         };
-        this.fetchData(("http://" + ip + "/api/data"), "get", headers, e);
+        this.fetchData(("http://" + ip + "/api/tagtemp/257385652260480/day/2018-11-24"), "get", headers, e);
     }
 
     toggleSettings() {

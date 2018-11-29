@@ -36,7 +36,7 @@ class Login extends Component {
         throw result;
       })
       .then((result) => {
-        sessionStorage.setItem('tok', JSON.stringify(result.data.api_token));
+        sessionStorage.setItem('tok', JSON.stringify(result.api_token));
         sessionStorage.setItem('nam', JSON.stringify(result.data.name));
         this.props.handleLogin();
       })
