@@ -1,23 +1,26 @@
 <?php
  
 namespace App\Http\Controllers;
- 
-use Illuminate\Http\Request;
-use App\Ruuvitag;
+
+use App\Ruuvitag; 
 use DB;
- 
+use Illuminate\Http\Request;
+
 class RuuvitagController extends Controller
 {
+	//Hakee kaikki Ruuvitag-sensorien tiedot mallin kautta tietokantataulusta
     public function index()
     {
         return Ruuvitag::all();
     }
- 
+
+	//Hakee tietyn Ruuvitag:n tiedot Ruuvitag:n MAC:n perusteella (muunnettu bigint tietokantaa  varten)
     public function show(Ruuvitag $tag)
     {
         return $tag;
     }
  
+	//Validointia kokeiltu. Ei ole toteutettu admin-hallintapaneelia, missä tätä käytettäisi.
     public function store(Request $request)
     {
         /*
@@ -35,6 +38,7 @@ class RuuvitagController extends Controller
         return response()->json($tag, 201);
     }
  
+	//Ei ole toteutettu admin-hallintapaneelia. Tätä ei käytetä mihinkään tällä hetkellä
     public function update(Request $request, Ruuvitag $tag)
     {
         $tag->update($request->all());
@@ -42,6 +46,7 @@ class RuuvitagController extends Controller
         return response()->json($tag, 200);
     }
  
+	//Ei ole toteutettu admin-hallintapaneelia. Tätä ei käytetä mihinkään tällä hetkellä
     public function delete(Ruuvitag $tag)
     {
         $tag->delete();
@@ -49,14 +54,13 @@ class RuuvitagController extends Controller
         return response()->json(null, 204);
     }
     
+	//Hakee kaiken tietyllä Ruuvitag:lla mitatun datan JSON-muodossa. Palauttaa JSON-muodossa 404-viestin jos Ruuvitag ei löydy
     public function tagdata($tag)
     {
 		try {
 			$data = Ruuvitag::find($tag)->data;
 			echo $data;
 		} catch (\Exception $e){
-			//echo 'Caught exception: ',  $e->getMessage(), "\n";
-			//return response()->json(null, 204);
 			return response()->json([
 				'message' => 'Resource not found'
 			], 404);
@@ -64,6 +68,7 @@ class RuuvitagController extends Controller
         
     }
     
+	//Hakee kaikki tietyllä Ruuvitag:lla mitatut lämpötilat ja mittausajat
     public function tagtemp($tag)
     {
         $taga = Ruuvitag::find($tag);
@@ -73,6 +78,7 @@ class RuuvitagController extends Controller
         echo $data;
     }
     
+	
     public function tagtempd($tag)
     {
         $taga = Ruuvitag::find($tag);
@@ -81,6 +87,8 @@ class RuuvitagController extends Controller
         echo $data;
     }
     
+	//Hakee tietyn Ruuvitagin tiettynä päivänä mitatut lämpötilat.
+	//Kommenteissa yrityksiä
     public function tagtemph($tag, $day)
     {
         //SELECT [activity_dt], count(*) FROM table1 GROUP BY hour( activity_dt ) , day( activity_dt )
@@ -88,9 +96,7 @@ class RuuvitagController extends Controller
         $day = $day . '%';
 
         //select `Temp`, `CAST(Time` as `day)` from `Data`
-        
         //select `Temp`, `CAST(Time` as `day)` from `Data`
-        
         //select Temp, cast(Time as day) from `Data` 
         
         $taga = Ruuvitag::find($tag);

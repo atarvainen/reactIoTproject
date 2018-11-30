@@ -7,16 +7,19 @@ use App\Data;
  
 class DataController extends Controller
 {
+	//Hakee kaiken datan Data-mallin kautta Data-taulusta
     public function index()
     {
         return Data::all();
     }
  
+	//Hakee tietyn tietueen id-numerolla (taulussa 'Count') Data-mallin kautta
     public function show(Data $data)
     {
         return $data;
     }
- //'Count', 'Temp', 'Humidity', 'Pressure', 'Acceleration-X', 'Acceleration-Y', 'Acceleration-Z', 'Power', 'Time', 'RuuviTagId',
+ 
+	//IoT-toteutus täyttää tietokantaa mittausten perusteella, joten tätä ei käytetä mihinkään tällä hetkellä
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -34,6 +37,7 @@ class DataController extends Controller
         return response()->json($data, 201);
     }
  
+	//Mittausdataa ei pitäisi muokata jälkikäteen, joten tätä ei käytetä mihinkään tällä hetkellä
     public function update(Request $request, Data $data)
     {
         $data->update($request->all());
@@ -41,6 +45,7 @@ class DataController extends Controller
         return response()->json($data, 200);
     }
  
+	//Mittausdataa ei pitäisi poistaa, joten tätä ei käytetä mihinkään tällä hetkellä
     public function delete(Data $data)
     {
         $data->delete();
