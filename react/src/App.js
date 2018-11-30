@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Main from './Main';
 
-//Check for login and render appropriate view
+//Check sessionstorage for login data and render appropriate view
 class App extends Component {
 
   render() {
