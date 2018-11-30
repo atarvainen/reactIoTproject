@@ -1,10 +1,12 @@
 const self = this;
 
+// Export worker
 export default () => {
     self.addEventListener('message', e => {
         if (!e) return;
         let query = e.data;
-
+        
+        
         fetch(query.url, {
             method: query.method,
             headers: query.headers
