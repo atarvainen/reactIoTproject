@@ -40,11 +40,17 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 
 /app/Http/Controller/DataController.php
 /app/Http/Controller/RuuvitagController.php
-
+/app/Http/Middleware/Authenticate.php
 /routes/api.php
 
 ## Toteuttamatta jääneet ominaisuudet
 
-* Admin-panel, josta voisi lisätä ja poistaa Ruuvitag-sensoreita.
+* Admin-panel, josta voisi lisätä ja poistaa Ruuvitag-sensoreita sekä käyttäjiä.
 * Käyttäjät eivät voi asettaa itselleen tai poistaa itseltään Ruuvitag-sensoreita
-* 
+
+## Kohdattuja ongelmia
+
+* CORS
+* Labranetin virtuaalikoneella liian vähän resursseja. Kaikki kyselyt eivät toimineet, poistettu 30.11. 150000 riviä Data-taulusta
+* Mixed Content kun Laravel Labranetin virtuaalikoneella ja React Studentilla. Korjattu ottamalla virtuaalikoneella käyttöön itse allekirjoitettu sertifikaatti, jolloin saatu https käyttöön. Aikaisemmin ei ongelma kun Student oli http.
+
