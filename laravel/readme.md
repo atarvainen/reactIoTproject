@@ -12,6 +12,12 @@ Representational State Transfer (REST) on HTTP-protokollaan perustuva arkkitehtu
 
 Saimme toteutettua toimivan kokonaisuuden, joka on kohtuullisen monipuolinen. Käytämmä mm. osassa rajapintoja api_token –avainta, jolla rajoitetaan ketkä saavat pyyntöihin vastauksen. Ongelmia oli erittäin paljon ja emme käyttäneet tuntikirjanpitoa, joten emme tarkkaan kykene osoittamaan, kuinka paljon olemme käyttäneet aikaa eri haasteisiin. Lähdekoodit ovat tässä kansiossa ja ohjelma pyörii Labranet:ssa olevalla virtuaalikoneella (IP-osoite: 192.168.9.133).
 
+### Tietokantakuvaus
+
+Osa tauluista tehtiin ennen kuin Laravel-projekti alkoi ja osa tauluista on tehty php artisan make:migration -toiminnallisuudella. Meidän tekemät migrate-tiedostot ovat [/database/migrations](https://github.com/atarvainen/reactIoTproject/tree/master/laravel/database/migrations)-kansiossa ja ne on ajettu tietokantaan php artisan migrate:lla.
+
+[databaseschema](../laravel/images/iotschema.png)
+
 ### Rajapintakuvaukset
 
 [Rajapintakuvauksia ei ole kirjoitettu kaikista resursseista](../laravel/interfacedescription.md)
