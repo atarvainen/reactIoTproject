@@ -14,13 +14,13 @@ Saimme toteutettua toimivan kokonaisuuden, joka on kohtuullisen monipuolinen. K�
 
 ### Rajapintakuvaukset
 
-[Rajapintakuvauksia ei ole kirjoitettu kaikista resursseista](/interfacedescription)
+[Rajapintakuvauksia ei ole kirjoitettu kaikista resursseista](../laravel/interfacedescription)
 
 ### Advanced Rest Client:lla otettuja kuvakaappauksia POST /api/login -rajapintaan lähetetystä pyynnöstä ja vastauksesta
 
-![postloginrequest](../images/postloginrequest.png)
+![postloginrequest](../laravel/images/postloginrequest.png)
 
 ### Vastaus
 
-![postloginresponse](../images/postloginresponse.png)
+![postloginresponse](../laravel/images/postloginresponse.png)
 
