@@ -16,7 +16,7 @@ Saimme toteutettua toimivan kokonaisuuden, joka on kohtuullisen monipuolinen. K�
 
 Osa tauluista tehtiin ennen kuin Laravel-projekti alkoi ja osa tauluista on tehty php artisan make:migration -toiminnallisuudella. Meidän tekemät migrate-tiedostot ovat [/database/migrations](https://github.com/atarvainen/reactIoTproject/tree/master/laravel/database/migrations)-kansiossa ja ne on ajettu tietokantaan php artisan migrate:lla.
 
-[databaseschema](../laravel/images/iotschema.png)
+![databaseschema](../laravel/images/iotschema.png)
 
 ### Rajapintakuvaukset
 
@@ -33,4 +33,12 @@ POST-pyynnöissä parametreja välitetään kutsun sisällä ("Body", vrt. osoit
 Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle osoitetut RuuviTag-sensorien tiedot.
 
 ![postloginresponse](../laravel/images/postloginresponse.png)
+
+### /routes
+
+#### TODO Joose muokkaa routes
+
+### /resources/views
+
+#### TODO Joose muokkaa views
 
