@@ -12,10 +12,12 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string
      */
+	
+	//Virheilmoitusta ilmeisesti koska named route, nyt palauttaa view.
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            return view('getdisabled');
         }
     }
 }
