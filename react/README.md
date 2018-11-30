@@ -13,5 +13,5 @@ Toimintoja
 
 # Käyttöliittymä
 
-![reactApp](../images/ui.png)
+![reactApp](/images/ui.PNG)
 
