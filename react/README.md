@@ -11,3 +11,7 @@ Toimintoja
 * käyttäjätietojen muokkaus, password reset.
 * lämpötila-, kosteus- ja läsnäolodatan haku apista.
 
+# Käyttöliittymä
+
+![reactApp](../images/ui.png)
+
