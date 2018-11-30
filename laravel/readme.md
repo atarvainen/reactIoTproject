@@ -14,7 +14,7 @@ Saimme toteutettua toimivan kokonaisuuden, joka on kohtuullisen monipuolinen. K�
 
 ### Rajapintakuvaukset
 
-[Rajapintakuvauksia ei ole kirjoitettu kaikista resursseista](../laravel/interfacedescription)
+[Rajapintakuvauksia ei ole kirjoitettu kaikista resursseista](../laravel/interfacedescription.md)
 
 ### Advanced Rest Client:lla otettuja kuvakaappauksia POST /api/login -rajapintaan lähetetystä pyynnöstä ja vastauksesta
 
