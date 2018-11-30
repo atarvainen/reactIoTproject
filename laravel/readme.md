@@ -20,7 +20,9 @@ Osa tauluista tehtiin ennen kuin Laravel-projekti alkoi ja osa tauluista on teht
 
 ### Rajapintakuvaukset
 
-[Rajapintakuvauksia ei ole kirjoitettu kaikista resursseista](../laravel/interfacedescription.md)
+[Rajapintakuvauksia (ei ole kirjoitettu kaikista resursseista)](../laravel/interfacedescription.md)
+
+TODO Joose muokkaa routes
 
 #### Advanced Rest Client:lla lähetetty pyyntö POST /api/login -rajapintaan
 
@@ -34,11 +36,15 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 
 ![postloginresponse](../laravel/images/postloginresponse.png)
 
-### /routes
+## Lista tiedostoista, joita olemme kommentoineet
 
-#### TODO Joose muokkaa routes
+/app/Http/Controller/DataController.php
+/app/Http/Controller/RuuvitagController.php
 
-### /resources/views
+/routes/api.php
 
-#### TODO Joose muokkaa views
+## Toteuttamatta jääneet ominaisuudet
 
+* Admin-panel, josta voisi lisätä ja poistaa Ruuvitag-sensoreita.
+* Käyttäjät eivät voi asettaa itselleen tai poistaa itseltään Ruuvitag-sensoreita
+* 
