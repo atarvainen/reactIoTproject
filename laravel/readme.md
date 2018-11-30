@@ -18,9 +18,9 @@ Saimme toteutettua toimivan kokonaisuuden, joka on kohtuullisen monipuolinen. K�
 
 ### Advanced Rest Client:lla otettuja kuvakaappauksia POST /api/login -rajapintaan lähetetystä pyynnöstä ja vastauksesta
 
-![postloginrequest](../images/postloginrequest)
+![postloginrequest](../images/postloginrequest.png)
 
 ### Vastaus
 
-![postloginresponse](../images/postloginresponse)
+![postloginresponse](../images/postloginresponse.png)
 
