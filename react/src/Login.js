@@ -1,19 +1,48 @@
 import React, { Component } from 'react';
 import './App.css';
 import { ip } from './ServerConf';
+import WebWorker from './WebWorker';
+import TempFetch from './TempFetchWorker';
+import AttFetch from './AttFetchWorker';
+import HumFetch from './HumFetchWorker';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "Email",
-      pass: "password",
+      value: "",
+      pass: "",
       loginFail: false,
       loginError: ""
     }
     this.handleClick = this.handleClick.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.fetchWithWorker = this.fetchWithWorker.bind(this);
+  }
+
+  componentDidMount() {
+    this.tempWorker = new WebWorker(TempFetch);
+    this.attWorker = new WebWorker(AttFetch);
+    this.humWorker = new WebWorker(HumFetch);
+
+    this.tempWorker.addEventListener('message', event => {
+      const chartData = event.data;
+
+      console.log(chartData);
+      this.props.handleChartData(chartData);
+    });
+    this.attWorker.addEventListener('message', event => {
+      const chartData = event.data;
+
+      console.log(chartData);
+      this.props.handleChartData(chartData);
+    });
+    this.humWorker.addEventListener('message', event => {
+      const chartData = event.data;
+
+      console.log(chartData);
+      this.props.handleChartData(chartData);
+    });
   }
 
   handleSubmit(e) {
@@ -38,6 +67,7 @@ class Login extends Component {
       .then((result) => {
         sessionStorage.setItem('tok', JSON.stringify(result.api_token));
         sessionStorage.setItem('nam', JSON.stringify(result.data.name));
+        this.fetchWithWorker();
         this.props.handleLogin();
       })
       .catch((error) => {
@@ -53,27 +83,25 @@ class Login extends Component {
       });
   }
 
-  handleClick(event) {
-    event.stopPropagation();
+  fetchWithWorker() {
+    let headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
+    };
+    let fetchData = {
+        headers: headers,
+        method: "get",
+        url: ("http://" + ip + "/api/data")
+    }
+
+    this.attWorker.postMessage(fetchData);
+    this.humWorker.postMessage(fetchData);
+    this.tempWorker.postMessage(fetchData);
   }
 
-  handleFocus(a) {
-    if (a.target.type === "text") {
-      if (this.state.value === "Email") {
-        this.setState({ value: "" });
-      }
-      else if (this.state.value === "") {
-        this.setState({ value: "Email" });
-      }
-    }
-    else {
-      if (this.state.pass === "password") {
-        this.setState({ pass: "" });
-      }
-      else if (this.state.pass === "") {
-        this.setState({ pass: "password" });
-      }
-    }
+  handleClick(event) {
+    event.stopPropagation();
   }
 
   handleChange(a) {
@@ -97,8 +125,8 @@ class Login extends Component {
           <h1>Login</h1>
           {p}
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <input type="text" value={this.state.value} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
-            <input type="password" value={this.state.pass} onFocus={this.handleFocus.bind(this)} onBlur={this.handleFocus.bind(this)} onChange={this.handleChange.bind(this)}></input>
+            <input type="text" placeholder="Email" onChange={this.handleChange.bind(this)}></input>
+            <input type="password" placeholder="Password" onChange={this.handleChange.bind(this)}></input>
             <input className="button1" type="submit" value="Login"></input>
             <button className="button1" onClick={this.props.closeLogin}>Close</button>
           </form>
