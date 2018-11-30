@@ -17,9 +17,16 @@ Toimintoja
 
 Yksinkertainen alkunäkymä, jossa pyydämme käyttäjää rekisteröitymään tai kirjautumaan sisään, jollei kirjautumista ole sessiomuistissa.
 
-![reactApp](/images/login.PNG)
+![Login](/images/login.PNG)
 
 Login toteutettu popup tyylisenä, sulkeminen tapahtuu klikkaamalla loginin ulkopuolelle tai close buttonilla. Nimi ja salasana placeholderit aikaisemmassa versiossa toteutettiin blurrin ja onfocusin avulla, mutta muistuessa mieleen HTML sisäänrakennettu placeholder toiminnallisuus siirryimme siihen.
 
-![reactApp](/images/register.PNG)
+![Register](/images/register.PNG)
+
+Rekisteröinti toteutettu samanlailla kuin login popup.
+
+![Chart selection](/images/chartchoice.PNG)
+
+Käyttäjä voi valita mistä datasta haluaa piirtää kaavion, tämän lisäksi valita voi kolmesta erilaisesta kaaviosta.
+
 
