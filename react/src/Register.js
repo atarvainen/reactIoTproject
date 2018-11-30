@@ -21,7 +21,7 @@ class Register extends Component {
     handleSubmit(e) {
         e.preventDefault();
         if (this.state.pass === this.state.passConf) {
-            fetch(("http://" + ip + "/api/register"), {
+            fetch((ip + "/api/register"), {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',

@@ -47,7 +47,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    fetch(("http://" + ip + "/api/login"), { //Muokattu alkuperäinen: "http://localhost:8000/api/login"
+    fetch((ip + "/api/login"), { //Muokattu alkuperäinen: "http://localhost:8000/api/login"
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -92,7 +92,7 @@ class Login extends Component {
     let fetchData = {
         headers: headers,
         method: "get",
-        url: ("http://" + ip + "/api/data")
+        url: (ip + "/api/data")
     }
 
     this.attWorker.postMessage(fetchData);

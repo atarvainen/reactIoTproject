@@ -76,7 +76,7 @@ class Navbar extends Component {
   }
 
   handleLogoutClick() {
-    fetch(("http://" + ip + "/api/logout"), {  //Muokattu alkuperäinen: http://localhost:8000/api/logout
+    fetch((ip + "/api/logout"), {  //Muokattu alkuperäinen: http://localhost:8000/api/logout
       method: 'post',
       headers: {
         "Accept": "application/json",
