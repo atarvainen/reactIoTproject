@@ -2,4 +2,6 @@
 
 Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel REST API rajapinta ja tätä hyödyntävä NPM React frontend.
 
-### [React dokumentaatio](/Docs/reactraportti.md)
+### [React dokumentaatio](/react/README.md)
+
+### [Laravel API dokumentaatio](/laravel/README.md)
