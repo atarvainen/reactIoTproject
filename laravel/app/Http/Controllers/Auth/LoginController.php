@@ -47,6 +47,8 @@ class LoginController extends Controller
 
 		if ($this->attemptLogin($request)) {
 			$user = $this->guard()->user();
+			
+			//kirjautuessa generoi käyttäjälle uuden api_token
 			$user->generateToken();
 			
 			return response()->json([
@@ -56,7 +58,7 @@ class LoginController extends Controller
 
 		return $this->sendFailedLoginResponse($request);
     }
-    //admin panelin käyttämä login
+    //admin panelin käyttämä login. Tämä ei käytä api_token, tilallinen selainsessio.
 	public function login(Request $request)
 	{
 		info($request->route('id'));
@@ -85,6 +87,8 @@ class LoginController extends Controller
 		$user = Auth::guard('api')->user();
 
 		if ($user) {
+			
+			//Nollaa api_token ja kirjautuu ulos, JSON-muodossa Reactille HTTP-vastaus.
 			$user->api_token = null;
 			$user->save();
 			Auth::logout();
