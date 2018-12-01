@@ -17,3 +17,5 @@ Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel RES
 ### [React dokumentaatio](/react/README.md)
 
 ### [Laravel API dokumentaatio](/laravel/readme.md)
+
+### [Laravel admin panel dokumentaatio](/laravel/adminpanel.md)
