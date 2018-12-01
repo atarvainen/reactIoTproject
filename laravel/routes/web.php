@@ -16,11 +16,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users', 'UserController@list_all');
-Route::get('/delete/{id}', 'UserController@delete');
-Route::get('/edit/{id}', 'UserController@edit');
-Route::post('save', 'UserController@save');
+//Routet laitettu groupin sisälle, jotta pääsy evätään niiltä jotka eivät ole kirjautuneet sisään
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/users', 'UserController@list_all');
+    Route::get('/delete/{id}', 'UserController@delete');
+    Route::get('/edit/{id}', 'UserController@edit');
+    Route::post('save', 'UserController@save');
+});
 /*Route::group(['middleware' => ['auth', 'admin']], function() {
     // your routes
     Route::get('login', 'Auth\LoginController@login');
