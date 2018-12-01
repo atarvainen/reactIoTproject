@@ -151,7 +151,7 @@ Saimme mielestämme tehtyä toimivan ratkaisun RuuviTagien datan visualisointiin
 * Antti Tarvainen: 5
   * Reactin tekeminen kallistui hieman enemmän minulle. Workkereiden kanssa säätämiseen meni suurin osa ajasta, sain toimimaan dev ympäristössä hyvin, mutta buildissa ei. Takaisin workkereistä siirtyminen vei hieman turhaa aikaa. Muuten projekti onnistui minun osaltani hyvin.
 * Joose Seppälä: 1
- * Työ minun kohdalta pahasti ohitse, ulkomaan reissun takia ja missasin react ja laravel tunnit, Tekemättömien tehtävien takia oli vaikea päästä mukaan ja aika loppui armottomasti kesken.
+  * Työ minun kohdalta pahasti ohitse, ulkomaan reissun takia ja missasin react ja laravel tunnit, Tekemättömien tehtävien takia oli vaikea päästä mukaan ja aika loppui armottomasti kesken.
 
 
 
