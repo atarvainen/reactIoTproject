@@ -4,6 +4,8 @@
 
 [Latest Laravel build](https://192.168.9.133)
 
+# Looks like Labranet's Virtual Machine is down. We'll deploy Laravel to a different server and rebuild React soon.
+
 Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel REST API rajapinta ja tätä hyödyntävä NPM React frontend.
 
 ### [React dokumentaatio](/react/README.md)
