@@ -99,5 +99,5 @@ Yritimme myös react app rewired kirjastoa, joka sallii webpackin konfiguroinnin
 
 # Pohdinta
 
-Devaus serviceworkkerin päällä ollessa voi tuhlata monia tunteja, jos ei tajua workkerin cacheavan kaikkea, kun muutoksia näe ilman cachen tyhjentämistä.
+Devaus serviceworkkerin päällä ollessa voi tuhlata monia tunteja, jos ei tajua workkerin cacheavan kaikkea, kun muutoksia ei näe ilman cachen tyhjentämistä.
 
