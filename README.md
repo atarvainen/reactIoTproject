@@ -10,6 +10,8 @@
 
 ## 7:34 Failed to build and deploy. Now building a Virtual Box VM.
 
+## 9:23 Uploading VM.
+
 Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel REST API rajapinta ja tätä hyödyntävä NPM React frontend.
 
 ### [React dokumentaatio](/react/README.md)
