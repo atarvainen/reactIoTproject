@@ -25,6 +25,7 @@ class Data extends Model
     ];
     
     // Relation.
+    //Funktio-palauttaa dataan liittyvän RuuviTagId:n RuuviTag-modelin kautta
     public function tag()
     {
         return $this->belongsTo(Ruuvitag::class, 'RuuviTagId');
