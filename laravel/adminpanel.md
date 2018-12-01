@@ -5,7 +5,7 @@ Tarkoituksena oli tehdä projektiin oma admin paneeli, mistä voidaan muokata My
 
 ## Admin paneeliin kirjautuminen
 Admin paneeli sivustolle pääsee sisälle, kun kirjaudutaan kätrräjätunnuksilla, joiden id löytyy admins taulusta. Jos id:tä ei löydy, sivusto ilmoittaa siitä käyttäjälle ohjaamalla näkymään, mikä kertoo, että pääsy on evätty, koska et ole admin.
-![Admin Edit näkymä](../images/apedit.PNG)
+![Admin Edit näkymä](../images/apunauth.PNG)
 
 ## Admin näkymä
 Tässä on kuva admin panelin muokkaus näkymästä.
