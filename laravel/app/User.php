@@ -24,11 +24,13 @@ class User extends Authenticatable
      *
      * @var array
      */
+    //Model:sta ei saa ulos näitä tietoja
     protected $hidden = [
         'password', 'remember_token','api_token',
     ];
 	
 	//https://www.toptal.com/laravel/restful-laravel-api-tutorial
+	//generoi api_token, tallentaa tietokantaan mallin avulla ja palauttaa generoidun avaimen
 	public function generateToken()
     {
         $this->api_token = str_random(60);
@@ -37,6 +39,7 @@ class User extends Authenticatable
         return $this->api_token;
     }
 	
+	//Palauttaa mallien avulla kaikki käyttäjälle (id) osoitettujen Ruuvitagien tiedot.
 	public function ruuvitags(){
 		$ruuvitags_users = RuuvitagsUser::where('userid',$this->id)->get();
 		return $ruuvitags_users;
