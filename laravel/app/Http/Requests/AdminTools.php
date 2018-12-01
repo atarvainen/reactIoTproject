@@ -6,6 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AdminTools extends FormRequest
 {
+    
+    //Joose yritti saada toimimaan admin-paneeliin validoinnin tällä tavalla. Ei ratkaissut ongelmaa
+    
     /**
      * Determine if the user is authorized to make this request.
      *
