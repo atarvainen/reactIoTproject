@@ -69,8 +69,6 @@ Saimme toteutettua suurimman osan toiminnoista, vaikka apin puutteet ei sallinut
 
 Kirjautuminen ja rekisteröityminen toimivat saumattomasti.
 
-Käyttäjän tietojen muokkaus jäi ajan loppuessa puuttumaan.
-
 Kaavioiden piirtäminen toimii, tähän yritimme rakentaa webWorkkereitä pirtäämään kaavion valmiiksi, webworker ei toimi.
 
 Datan hakeminen toimii reactista apiin, tähän myös otimme käyttöön webWorkkerit, jotka hakivat datan valmiiksi heti käyttäjän kirjauduttua. Fetchworkkerit toimivat vain devaus vaiheessa, npm run build jälkeen workkerit lakkasivat toimimasta.
@@ -87,4 +85,15 @@ Ilman serviceworkkeriä jokainen datan haku kestää >400ms, workkerin avulla en
 
 Serviceworkkerillä olisi myös mahdollista precachea esim. koko sivusto offline-käyttöä varten.
 
+# Ei toteutetut toiminnot
+
+Käyttäjän tietojen muokkaus jäi ajan loppuessa puuttumaan.
+
+# Ei-toimivat toiminnot
+
+Datan haku apista ruuvitagin idtä käyttämällä ei onnistu, tämä tosin johtuu apista.
+
+Webworkkerien toimintaa yritimme monella eri tekniikalla saada toimimaan build versiossa. Dev ympäristössä webworkkerit sai toimimaan käyttämällä webpackiä muuttamaan worker url muotoon. Näin worker saatiin toimimaan erillään muusta toiminnasta, mutta npm buildatessa reitit oletettavasti hajosivat ja workkerit irtosivat projektista.
+
+Yritimme myös react app rewired kirjastoa, joka sallii webpackin konfiguroinnin ilman npm ejectiä, mutta tässä myöskään workerit eivät toimineet buildissa.
 
