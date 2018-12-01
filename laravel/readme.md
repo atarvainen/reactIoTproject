@@ -58,6 +58,7 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 * /resources/views/-kansio
 * /resources/views/layouts/app.blade.php
 * /routes/api.php
+* /routes/web.php
 
 ## Toteuttamatta jääneet ominaisuudet
 
