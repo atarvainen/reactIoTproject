@@ -12,7 +12,6 @@ Toimintoja
 * lämpötila-, kosteus- ja läsnäolodatan haku apista.
 * kaavioiden piirtäminen chart.js:llä
 
-# Toteutuneet toiminnot
 # Käyttöliittymä
 
 Kaikenlaisen tyylittelyn jätimme tärkeysjärjestyksessä alimmaksi, joten tämän kannalta on tehty vain bare minimum.
