@@ -38,6 +38,7 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 
 ## Lista tiedostoista, joita olemme kommentoineet
 
+* /app/Admin.php
 * /app/Exceptions/Handler.php
 * /app/Http/Kernel.php
 * /app/Http/Controllers/DataController.php
