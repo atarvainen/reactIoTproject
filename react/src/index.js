@@ -12,4 +12,4 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 //used customWorker.js instead of workbox package
 //customWorker doesn't work in build
-serviceWorker.unregister();
+serviceWorker.register();

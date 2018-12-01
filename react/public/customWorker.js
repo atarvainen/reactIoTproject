@@ -1,8 +1,6 @@
-var CACHE_NAME = 'my-site-cache-v1';
+var CACHE_NAME = 'my-cache';
 //url to precache in install
 var urlsToCache = [
-    './App.js',
-    '/App.css'
 ];
 
 self.addEventListener('install', (event) => {
@@ -21,8 +19,9 @@ self.addEventListener('fetch', (event) => {
 
     // If fetch method is not get, let browser handle
     if (event.request.method != 'GET') return;
-
+    console.log("fetching with worker");
     event.respondWith(
+        
         caches.open(CACHE_NAME)
             .then((cache) => {
                 // Try to match request with cache
