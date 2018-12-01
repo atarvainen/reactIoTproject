@@ -78,3 +78,8 @@ Ylimääräisenä otimme käyttöön osaksi sisäänrakennetun create-react-appi
 
 Kaikki fetchit menevät serviceworkkerin kautta ja worker tarkistaa ensin onko cachessä jo valmiiksi haettavaa dataa, jos ei fetch lähetetään apille asti ja response tallennetaan cacheen ja palautetaan alkuperäiseen fetchiin.
 
+![Data fetch without worker](/images/datafetch1.PNG)
+
+Ilman serviceworkkeriä jokainen datan haku kestää >400ms, workkerin avulla ensimmäisen haun jälkeiset haut kestävät vain <5ms.
+
+![Data fetch with worker](/images/datafetch2.PNG)
