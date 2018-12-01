@@ -8,6 +8,8 @@
 
 ## 7:00 Managed to get backup db to student. Now checking whether it's possible to build Laravel to student.
 
+## 7:34 Failed to build and deploy. Now building a Virtual Box VM.
+
 Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel REST API rajapinta ja tätä hyödyntävä NPM React frontend.
 
 ### [React dokumentaatio](/react/README.md)
