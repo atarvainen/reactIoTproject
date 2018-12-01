@@ -99,9 +99,13 @@ Yritimme myös react app rewired kirjastoa, joka sallii webpackin konfiguroinnin
 
 # Ongelmatilanteita
 
+Reactin toteutus kärsi samanaikaisesta apin devauksesta. Apin ollessa erillisillä virtuaalikoneilla, ei aina samassa osoitteessa, eikä välillä edes toiminnassa toi haasteita fetchien toiminnallisuuden toteuttamiseen. Suurin osa toiminnoista kuitenkin vaativat apin toimiakseen.
 
+Buildin jälkeinen toiminta tuotti ongelmia erityisesti workkerien osalta, npm ei osannut rakentaa webworkerien polkuja oikein. Buildaaminen onnistui ongelmitta, mutta sivusto ei saanut lähetettyä tietoa workkereille.
+
+Devaus serviceworkkerin päällä ollessa tuhlasi jonkin verran aikaa, worker tallensi cacheen koko sivuston ja muutoksia ei saanut näkyviin ilman cachen tyhjennystä. Tämän tajuamiseen meni hukkaan pari tuntia
 
 # Pohdinta
 
-Devaus serviceworkkerin päällä ollessa voi tuhlata monia tunteja, jos ei tajua workkerin cacheavan kaikkea, kun muutoksia ei näe ilman cachen tyhjentämistä.
+
 
