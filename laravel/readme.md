@@ -54,6 +54,7 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 * /app/Http/Middleware/CORS.php
 * /app/Http/Requests/AdminTools.php
 * /database/migrations - php artisan make:lla tehdyt templatet
+* /database/seeds/ProductsTableSeeder.php - tässä kokeiltu tietokannan täyttöä testi/dummy-datalla
 * /routes/api.php
 
 ## Toteuttamatta jääneet ominaisuudet
