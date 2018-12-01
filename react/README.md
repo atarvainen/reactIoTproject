@@ -97,3 +97,7 @@ Webworkkerien toimintaa yritimme monella eri tekniikalla saada toimimaan build v
 
 Yritimme myös react app rewired kirjastoa, joka sallii webpackin konfiguroinnin ilman npm ejectiä, mutta tässä myöskään workerit eivät toimineet buildissa.
 
+# Pohdinta
+
+Devaus serviceworkkerin päällä ollessa voi tuhlata monia tunteja, jos ei tajua workkerin cacheavan kaikkea, kun muutoksia näe ilman cachen tyhjentämistä.
+
