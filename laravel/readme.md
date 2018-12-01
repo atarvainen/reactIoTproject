@@ -38,11 +38,12 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 
 ## Lista tiedostoista, joita olemme kommentoineet
 
-/app/Exceptions/Handler.php
-/app/Http/Controller/DataController.php
-/app/Http/Controller/RuuvitagController.php
-/app/Http/Middleware/Authenticate.php
-/routes/api.php
+* /app/Exceptions/Handler.php
+* /app/Http/Kernel.php
+* /app/Http/Controller/DataController.php
+* /app/Http/Controller/RuuvitagController.php
+* /app/Http/Middleware/Authenticate.php
+* /routes/api.php
 
 ## Toteuttamatta jääneet ominaisuudet
 
