@@ -14,7 +14,7 @@ Saimme toteutettua toimivan kokonaisuuden, joka on kohtuullisen monipuolinen. K�
 
 ### Tietokantakuvaus
 
-Osa tauluista tehtiin ennen kuin Laravel-projekti alkoi ja osa tauluista on tehty php artisan make:migration -toiminnallisuudella. Meidän tekemät migrate-tiedostot ovat [/database/migrations](https://github.com/atarvainen/reactIoTproject/tree/master/laravel/database/migrations)-kansiossa ja ne on ajettu tietokantaan php artisan migrate:lla.
+Osa tauluista tehtiin ennen kuin Laravel-projekti alkoi ja osa tauluista on tehty php artisan make:migration -toiminnallisuudella. Meidän tekemät migrate-tiedostot ovat [/database/migrations](https://github.com/atarvainen/reactIoTproject/tree/master/laravel/database/migrations)-kansiossa ja ne on ajettu tietokantaan php artisan migrate:lla. 
 
 ![databaseschema](../laravel/images/iotschema.png)
 
@@ -22,7 +22,7 @@ Osa tauluista tehtiin ennen kuin Laravel-projekti alkoi ja osa tauluista on teht
 
 [Rajapintakuvauksia (ei ole kirjoitettu kaikista resursseista)](../laravel/interfacedescription.md)
 
-TODO Joose muokkaa routes
+Suurin osa reiteistä ovat api.php:ssa ja osa niistä vaatii api_token:n käyttöä. /api/-resurssit on tarkoitettu toisten ohjelmien, kuten React, käytettäväksi. web.php:ssa on Laravel:n admin-paneelin käyttämät reitit ja ne vaativat kirjautumisen, mutteivät api_token.
 
 #### Advanced Rest Client:lla lähetetty pyyntö POST /api/login -rajapintaan
 
@@ -38,6 +38,7 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 
 ## Lista tiedostoista, joita olemme kommentoineet
 
+/app/Exceptions/Handler.php
 /app/Http/Controller/DataController.php
 /app/Http/Controller/RuuvitagController.php
 /app/Http/Middleware/Authenticate.php
