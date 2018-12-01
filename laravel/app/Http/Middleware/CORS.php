@@ -3,7 +3,6 @@
 use Closure;
 
 class CORS {
-
     /**
      * Handle an incoming request.
      *
@@ -11,6 +10,8 @@ class CORS {
      * @param  \Closure  $next
      * @return mixed
      */
+    
+    //Tätä ei käytetä, yksi meidän kokeiluista määrittää cors-asetukset
     public function handle($request, Closure $next)
     {
 
