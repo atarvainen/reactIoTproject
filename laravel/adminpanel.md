@@ -12,6 +12,8 @@ Tässä on kuva admin panelin muokkaus näkymästä.
 ![Admin Edit näkymä](../images/apedit.PNG)
 Edit linkki hakee uuden näkymän laravelista, mikä määriytyy painetun sarakkeen käyttäjän id:n mukaan. Tällöin muokattavien kenttien kentät muuttuvat input elementeiksi, jolloin päästään muokkaamaan tietoja. Save napin kuuluisi lähettää form POST methodia käyttäen, mutta emme saaneet nappia toimimaan. Sivustoa emme saaneet mitenkään reagoimaan Save napin painalluksella, eli formin tiedot ei lähteneet liikkeelle. Delete linkki puolestaan poistaa koko käyttäjän tiedot tietokannasta.
 
+## Laravelin debuggaus logeista
+Ongelmien ratkomiseen käytimme laraverin debuggaus logeja, josta voitiin seurata mitä parametreissa kulkee tietttyjen toimintojen tapahtuessa. Oheessa kuva debuglogista, kuva ilmoittaa virheestä käyttäjän poistamisesta, jolla on tieto välitaulun kautta tietokannasta. ![Admin Edit näkymä](../images/apdebug.PNG)
 ## Toteuttamatta jääneet toiminnot
 
 Käyttäjien tietojen tallentaminen. Deletoinnin toimiminen kaikkien käyttäjien kohdalla.
