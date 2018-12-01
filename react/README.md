@@ -146,11 +146,11 @@ Saimme mielestämme tehtyä toimivan ratkaisun RuuviTagien datan visualisointiin
 
 # Arvioinnit
 
-Hannu Oksman: 5
+* Hannu Oksman: 5
   * En ehtinyt käyttää tähän ihan niin paljon aikaa kuin olisin halunnut. Osallistuin kuitenkin kaikkeen, selvitykseen ja tutkimukseen tein osioita ja tiedän miten ohjelma toimii. Tutustuin myös webpack-komponentin käyttöön, jolla saa paketoitua projektin hyvin käännösvaiheessa.
-Antti Tarvainen: 5
+* Antti Tarvainen: 5
   * Reactin tekeminen kallistui hieman enemmän minulle. Workkereiden kanssa säätämiseen meni suurin osa ajasta, sain toimimaan dev ympäristössä hyvin, mutta buildissa ei. Takaisin workkereistä siirtyminen vei hieman turhaa aikaa. Muuten projekti onnistui minun osaltani hyvin.
-Joose Seppälä: 1
+* Joose Seppälä: 1
  * Työ minun kohdalta pahasti ohitse, ulkomaan reissun takia ja missasin react ja laravel tunnit, Tekemättömien tehtävien takia oli vaikea päästä mukaan ja aika loppui armottomasti kesken.
 
 
