@@ -45,10 +45,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('tagdata/{tag}', 'RuuvitagController@tagdata');
 	Route::get('tagtemp/{tag}', 'RuuvitagController@tagtemp');
 	Route::get('tagtempd/{tag}/day/{day}', 'RuuvitagController@tagtempd');
-	Route::get('tagtemph/{tag}/day/{day}', 'RuuvitagController@tagtemph');
+	Route::get('tagtemp/{tag}/day/{day}', 'RuuvitagController@tagtemph');
 	Route::get('taghum/{tag}', 'RuuvitagController@taghum');
-	Route::get('taghum/{tag}/day/{day}', 'RuuvitagController@taghumd');
-	Route::get('taghumhourly/{day}', 'RuuvitagController@taghumh');
+	Route::get('taghumd/{tag}/day/{day}', 'RuuvitagController@taghumd');
+	Route::get('taghum/{tag}/day/{day}', 'RuuvitagController@taghumh');
 	Route::post('tags', 'RuuvitagController@store');
 	Route::put('tags/{tag}', 'RuuvitagController@update');
 	Route::delete('tags/{tag}', 'RuuvitagController@delete');

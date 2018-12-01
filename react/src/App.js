@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Main from './Main';
 
-//Check for login and render appropriate view
+//Check sessionstorage for login and render appropriate view
 class App extends Component {
 
   render() {
@@ -11,9 +11,14 @@ class App extends Component {
         <Main isLoggedIn={false} />
       );
     }
+    else if (sessionStorage.getItem('ruuvi') !== null) {
+      return (
+        <Main hasTag={true} isLoggedIn={true} user={sessionStorage.getItem('nam')} token={sessionStorage.getItem('tok')} ruuvi={sessionStorage.getItem('ruuvi')} />
+      )
+    }
     else {
       return (
-        <Main isLoggedIn={true} user={sessionStorage.getItem('nam')} token={sessionStorage.getItem('tok')} />
+        <Main hasTag={false} isLoggedIn={true} user={sessionStorage.getItem('nam')} token={sessionStorage.getItem('tok')} />
       )
     }
   }

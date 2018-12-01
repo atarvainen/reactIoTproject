@@ -54,6 +54,7 @@ class RuuvitagController extends Controller
         return response()->json(null, 204);
     }
     
+    //Ruuvitag::find löytää ruuvitagin mutta palauttaa aina vain ruuvitagid:2147483647, mutta oikean käyttäjänimen
 	//Hakee kaiken tietyllä Ruuvitag:lla mitatun datan JSON-muodossa. Palauttaa JSON-muodossa 404-viestin jos Ruuvitag ei löydy
     public function tagdata($tag)
     {
@@ -78,21 +79,21 @@ class RuuvitagController extends Controller
         echo $data;
     }
     
-	
-    public function tagtempd($tag)
+	//Hakee tietyn Ruuvitagin tiettynä päivänä mitatut lämpötilat.
+    public function tagtempd($tag, $day)
     {
+        $day = $day . '%';
         $taga = Ruuvitag::find($tag);
         
         $data = $taga->data()->selectRaw('Temp, cast(Time as time) as Time')->where('Time', 'like', $day)->get();
         echo $data;
     }
     
-	//Hakee tietyn Ruuvitagin tiettynä päivänä mitatut lämpötilat.
-	//Kommenteissa yrityksiä
+	//Hakee tietyn Ruuvitagin tiettynä päivänä tunnin välein mitatut lämpötilat.
+	//Kommenteissa sql kyselyiden yrityksiä laravel querybuilderilla
     public function tagtemph($tag, $day)
-    {
-        //SELECT [activity_dt], count(*) FROM table1 GROUP BY hour( activity_dt ) , day( activity_dt )
-        
+    {   
+        //käyttäjän antama päivämäärä muutetaan muotoon 2018-11-21% jotta aikaleima saadaan ohitettua
         $day = $day . '%';
 
         //select `Temp`, `CAST(Time` as `day)` from `Data`
@@ -111,6 +112,7 @@ class RuuvitagController extends Controller
         echo $data;
     }
     
+    //Samat toiminnot kuin lämpötilan haulle, mutta nyt kosteudelle
     public function taghum($tag)
     {
         $taga = Ruuvitag::find($tag);
@@ -120,21 +122,23 @@ class RuuvitagController extends Controller
         echo $data;
     }
     
-    public function taghumd($tag)
+    public function taghumd($tag, $day)
     {
+        $day = $day . '%';
+        
         $taga = Ruuvitag::find($tag);
         
-        $data = $taga->data()->select('Temp', 'Time')->get();
+        $data = $taga->data()->selectRaw('DISTINCT Humidity, EXTRACT(HOUR FROM Time) as Time')->where('Time', 'like', $day)->get();
         
         echo $data;
     }
     
     public function taghumh($tag)
     {
+        $day = $day . '%';
         $taga = Ruuvitag::find($tag);
         
-        $data = $taga->data()->select('Temp', 'Time')->get();
-        
+        $data = $taga->data()->selectRaw('Humidity, cast(Time as time) as Time')->where('Time', 'like', $day)->get();
         echo $data;
     }
 }

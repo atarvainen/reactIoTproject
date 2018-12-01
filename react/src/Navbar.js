@@ -30,25 +30,40 @@ class Navbar extends Component {
       showRegister: false,
       isLoggedIn: props.isLoggedIn,
       user: props.user,
-      token: props.token
+      token: props.token,
+      ruuvi: props.ruuvi
     }
     this.handleRegisterClick = this.handleRegisterClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLoginClickNoTag = this.handleLoginClickNoTag.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
     this.toggleLogin = this.toggleLogin.bind(this);
     this.toggleRegister = this.toggleRegister.bind(this);
   }
 
+  //set logged status and call parent to handle login as well
   handleLoginClick() {
+    this.setState({
+      isLoggedIn: true,
+      user: sessionStorage.getItem("nam"),
+      token: sessionStorage.getItem("tok"),
+      ruuvi: sessionStorage.getItem("ruuvi"),
+      showLogin: !this.state.showLogin
+    });
+    this.props.login();
+  }
+
+  handleLoginClickNoTag() {
     this.setState({
       isLoggedIn: true,
       user: sessionStorage.getItem("nam"),
       token: sessionStorage.getItem("tok"),
       showLogin: !this.state.showLogin
     });
-    this.props.login();
+    this.props.loginNoTag();
   }
 
+  //set logged status and call parent to handle login as well
   handleRegisterClick() {
     this.setState({
       isLoggedIn: true,
@@ -56,7 +71,7 @@ class Navbar extends Component {
       token: sessionStorage.getItem("tok"),
       showRegister: !this.state.showRegister
     });
-    this.props.login();
+    this.props.loginNoTag();
   }
 
   toggleLogin() {
@@ -71,46 +86,29 @@ class Navbar extends Component {
     });
   }
 
-  clear() {
-    this.value = '';
-  }
-
+  //fetch post logout to api for handling and call parent to handle logout as well
+  //logout even if api cant handle the request so catching errors is not needed
+  //clear sessionStorage here
   handleLogoutClick() {
-    fetch((ip + "/api/logout"), {  //Muokattu alkuperäinen: http://localhost:8000/api/logout
+    fetch((ip + "/api/logout"), {
       method: 'post',
       headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${sessionStorage.getItem('tok').replace(/"/g, '')}`
       },
     })
-      .then((result) => {
-        if (result.ok) {
-          return result.json();
-        }
-        throw result;
-      })
-      .catch((error) => {
-        if (error.status === 404) {
-          this.setState({ loginFail: true, loginError: "Failed connecting to login service." });
-        }
-        else if (error.name === "TypeError") {
-          this.setState({ loginFail: true, loginError: "Failed connecting to login service." });
-        }
-        else {
-          error.json().then(err => { this.setState({ loginFail: true, loginError: err.message }) });
-        }
-      });
     sessionStorage.clear();
     this.setState({ isLoggedIn: false });
     this.props.logout();
   }
 
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
     let button;
     let button2;
 
-    if (isLoggedIn) {
+    //set navbar buttons to reflect if user is logged in or not
+    if (this.state.isLoggedIn) {
       button = <LogoutButton onClick={this.handleLogoutClick} />;
       button2 = <span id="username" onClick={this.props.toggleSettings}>{sessionStorage.getItem("nam").replace(/"/g, '')}</span>
     } else {
@@ -122,11 +120,11 @@ class Navbar extends Component {
         <h1 id="title">Relaamo Ruuvitag</h1>
         <div id="info">
           {this.state.showLogin ?
-            <Login handleChartData={this.props.handleChartData} clear={this.clear.bind(this)} closeLogin={this.toggleLogin} handleLogin={this.handleLoginClick} />
+            <Login loginNoTag={this.handleLoginClickNoTag} fetchWithWorker={this.props.fetchWithWorker} handleChartData={this.props.handleChartData} closeLogin={this.toggleLogin} handleLogin={this.handleLoginClick} />
             : null
           }
           {this.state.showRegister ?
-            <Register clear={this.clear.bind(this)} closeRegister={this.toggleRegister} handleRegister={this.handleRegisterClick} />
+            <Register closeRegister={this.toggleRegister} handleRegister={this.handleRegisterClick} />
             : null
           }
           {button2}

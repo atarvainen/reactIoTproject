@@ -10,12 +10,14 @@ class BarChart extends Component {
         }
     }
 
+    //use default props if parent doesn't send any options
     static defaultProps = {
         displayTitle: true,
         displayLegend: true,
-        legendPosition: 'right'
+        legendPosition: 'bottom'
     }
 
+    //chart styling still a mess
     render() {
         return (
             <div className="chart">
@@ -24,7 +26,7 @@ class BarChart extends Component {
                         title: {
                             display: this.props.displayTitle,
                             text: this.state.data.title,
-                            fontSize: 25
+                            fontSize: 15
                         },
                         legend: {
                             display: this.props.displayLegend,

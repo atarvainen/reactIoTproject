@@ -18,6 +18,7 @@ class Register extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    //fetch post register to api and handle response
     handleSubmit(e) {
         e.preventDefault();
         if (this.state.pass === this.state.passConf) {
@@ -84,6 +85,7 @@ class Register extends Component {
     render() {
         let p;
 
+        //if registering fails render error message
         if (this.state.registerFail) {
             p = <p id='error'>{this.state.registerError}</p>;
         }

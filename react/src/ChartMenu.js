@@ -19,6 +19,9 @@ class ChartMenu extends Component {
         this.setState({ showAttMenu: false, showHumMenu: false, showTempMenu: false });
     }
 
+    //toggle display for menu and close other menus
+    //call parent method to handle data and chart choice
+    //could be simplified
     toggleAttMenu(e) {
         if (e.target.value !== "Att") {
             this.props.chartChoice(e.target.value);

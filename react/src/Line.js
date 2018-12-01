@@ -10,10 +10,11 @@ class LineChart extends Component {
         }
     }
 
+    //use default props if parent doesn't send any options
     static defaultProps = {
         displayTitle: true,
         displayLegend: true,
-        legendPosition: 'right'
+        legendPosition: 'bottom'
     }
 
     render() {

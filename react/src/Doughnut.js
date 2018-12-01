@@ -10,10 +10,11 @@ class DoughnutChart extends Component {
         }
     }
 
+    //use default props if parent doesn't send any options
     static defaultProps = {
         displayTitle: true,
         displayLegend: false,
-        legendPosition: 'right'
+        legendPosition: 'bottom'
     }
 
     render() {
@@ -24,7 +25,8 @@ class DoughnutChart extends Component {
                         title: {
                             display: this.props.displayTitle,
                             text: this.state.data.title,
-                            fontSize: 25
+                            fontSize: 25,
+                            cutoutPercentage: 0
                         },
                         legend: {
                             display: this.props.displayLegend,

@@ -32,6 +32,7 @@ export function register(config) {
     }
 
     window.addEventListener('load', () => {
+      //used customWorker.js instead of workbox package
       const swUrl = `${process.env.PUBLIC_URL}/customWorker.js`;
 
       if (isLocalhost) {
