@@ -26,8 +26,16 @@ Login toteutettu popup tyylisenä, sulkeminen tapahtuu klikkaamalla loginin ulko
 
 Rekisteröinti toteutettu samanlailla kuin login popup.
 
+![No tag](/images/notag.PNG)
+
 ![Chart selection](/images/chartchoice.PNG)
 
 Käyttäjä voi valita mistä datasta haluaa piirtää kaavion, tämän lisäksi valita voi kolmesta erilaisesta kaaviosta.
+
+![Bar chart](/images/bar.PNG)
+![Line chart](/images/line.PNG)
+![Donut chart](/images/donut.PNG)
+![Login error](/images/loginerror.PNG)
+![Password matching](/images/passmatch.PNG)
 
 
