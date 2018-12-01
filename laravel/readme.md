@@ -40,6 +40,7 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 
 * /app/Admin.php
 * /app/Data.php
+* /app/Ruuvitag.php
 * /app/Exceptions/Handler.php
 * /app/Http/Kernel.php
 * /app/Http/Controllers/DataController.php
