@@ -4,7 +4,7 @@ Hannu Oksman L2912, Antti Tarvainen L4623, Joose Seppälä M3579
 
 # Yleiskuvaus/suunnitelma
 
-TTOS0900 kurssille tekemäämme Laravel APIa hyödyntävä npm React sivusto. Tarkoituksena on hyödyntää apista saatavaa dataa kaavioiden piirtämiseen reactilla ja chart.js kirjastolla. Autentikointiin käytämme myös apin toimintoja.
+TTOS0900 kurssille tekemäämme Laravel APIa hyödyntävä npm React sivu. Tarkoituksena on hyödyntää apista saatavaa dataa kaavioiden piirtämiseen reactilla ja chart.js kirjastolla. Autentikointiin käytämme myös apin toimintoja.
 
 Toimintoja 
 * sisäänkirjautuminen ja rekisteröityminen.
@@ -15,6 +15,8 @@ Toimintoja
 # Käyttöliittymä
 
 Kaikenlaisen tyylittelyn jätimme tärkeysjärjestyksessä alimmaksi, joten tämän kannalta on tehty vain bare minimum.
+
+Konditionaaliseen renderäykseen käytetty useita menetelmiä, if else jos halusimme monia eri vaihtoehtoja samaan kohtaan eri tilanteissa. Ternary operaattoria jos komponentteja vain toggletaan pois tai päälle, tosin tämäkin on vain lyhennys if elsestä, mutta siistimpi ehkä käyttää render metodissa.
 
 ![reactApp](/images/ui.PNG)
 
@@ -82,3 +84,7 @@ Kaikki fetchit menevät serviceworkkerin kautta ja worker tarkistaa ensin onko c
 Ilman serviceworkkeriä jokainen datan haku kestää >400ms, workkerin avulla ensimmäisen haun jälkeiset haut kestävät vain <5ms.
 
 ![Data fetch with worker](/images/datafetch2.PNG)
+
+Serviceworkkerillä olisi myös mahdollista precachea esim. koko sivusto offline-käyttöä varten.
+
+
