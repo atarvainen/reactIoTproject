@@ -14,6 +14,8 @@ Toimintoja
 # Toteutuneet toiminnot
 # Käyttöliittymä
 
+Kaikenlaisen tyylittelyn jätimme tärkeysjärjestyksessä alimmaksi, joten tämän kannalta on tehty vain bare minimum.
+
 ![reactApp](/images/ui.PNG)
 
 Yksinkertainen alkunäkymä, jossa pyydämme käyttäjää rekisteröitymään tai kirjautumaan sisään, jollei kirjautumista ole sessiomuistissa.
@@ -28,14 +30,42 @@ Rekisteröinti toteutettu samanlailla kuin login popup.
 
 ![No tag](/images/notag.PNG)
 
-![Chart selection](/images/chartchoice.PNG)
+Jos kirjautuneella käyttäjällä ei ole rekisteröityä Ruuvitagiä, hän ei voi hakea dataa.
 
-Käyttäjä voi valita mistä datasta haluaa piirtää kaavion, tämän lisäksi valita voi kolmesta erilaisesta kaaviosta.
-
-![Bar chart](/images/bar.PNG)
-![Line chart](/images/line.PNG)
-![Donut chart](/images/donut.PNG)
 ![Login error](/images/loginerror.PNG)
+
+Kirjautumista yrittäessä api palauttaa viestin jos tiedot ovat väärin, tämä renderöidään näin sattuessa käyttäjälle. Myös apin saavuttamattomuudesta tiedotetaan.
+
 ![Password matching](/images/passmatch.PNG)
 
+Rekisteröityessä api myös palauttaa viestin epäonnistumisesta, mutta password ja password_conf tarkistus on tehty myös ohjelmallisesti.
+
+![Chart selection](/images/chartchoice.PNG)
+
+Käyttäjä voi valita mistä datasta haluaa piirtää kaavion, tämän lisäksi valita voi kolmesta erilaisesta kaaviosta. Tarkoituksena oli hakea dataa käyttäjään liitetyn RuuviTagin macin avulla, mutta apin RuuviTag::find() palauttaa saman 10 merkin osan idstä, vaikka tägiä hakee kenen idllä.
+
+Näin haemme siis vain kaikesta datasta 25kpl syötteitä, jotta saamme kaaviot piirrettyä.
+
+![Bar chart](/images/bar.PNG)
+
+Kaavioille on kaikille asetettu date/time x akselille ja arvot x akselille.
+
+Title asetetaan käyttäjän valinnasta, tässä jos käyttäjä valitsee esim. Temp pylväskaavion ja sen jälkeen jonkun toisen pylväskaavion, title pysyy Temppinä, tämä jäi korjaamatta.
+
+![Line chart](/images/line.PNG)
+
+Viivakaaviossa oletus tyylityksenä on täyttää myös viivan alapuolinen osa.
+
+![Donut chart](/images/donut.PNG)
+
+Piirakkakaaviota voisi käyttää läsnäolon mittaamiseen paremmin, mutta tätä toiminnallisuutta ei ole apissa, joten tämä on vain esimerkkinä.
+
+
+# Toteutuneet toiminnot
+
+Saimme toteutettua suurimman osan toiminnoista, vaikka apin puutteet ei sallinut näiden työstämistä täydelliseksi.
+
+Kirjautuminen ja rekisteröityminen toimivat saumattomasti.
+
+Käyttäjän tietojen muokkais jäi ajan loppuessa puuttumaan.
 
