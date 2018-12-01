@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,13 +17,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/users', 'UserController@list_all');
+Route::get('/delete/{id}', 'UserController@delete');
+Route::get('/edit/{id}', 'UserController@edit');
+Route::post('save', 'UserController@save');
+/*Route::group(['middleware' => ['auth', 'admin']], function() {
+    // your routes
+    Route::get('login', 'Auth\LoginController@login');
+    Route::get('harkat', 'HarkkaController@list_all');
+});*/
 
-Route::get('register', function () {
-    return view('getdisabled');
-});
-Route::get('login', function () {
-    return view('getdisabled');
-});
-Route::get('logout', function () {
-    return view('getdisabled');
-});

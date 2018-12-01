@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Admin;
 
 class LoginController extends Controller
 {
@@ -39,25 +40,47 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 	
-	//https://www.toptal.com/laravel/restful-laravel-api-tutorial
-	public function login(Request $request)
+	// apin käyttämä login
+	public function apilogin(Request $request)
 	{
 		$this->validateLogin($request);
 
 		if ($this->attemptLogin($request)) {
 			$user = $this->guard()->user();
-			$api_key = $user->generateToken();
+			$user->generateToken();
 			
 			return response()->json([
-				'data' => $user->toArray(), 'api_token' => $api_key, 'ruuvitags' => $user->ruuvitags()->toArray(),
+				'data' => $user->toArray(), 'ruuvitags' => $user->ruuvitags(),
 			]);
 		}
 
 		return $this->sendFailedLoginResponse($request);
-	}
-	
-	//https://www.toptal.com/laravel/restful-laravel-api-tutorial
-	public function logout(Request $request)
+    }
+    //admin panelin käyttämä login
+	public function login(Request $request)
+	{
+		info($request->route('id'));
+		info($request);
+		$this->validateLogin($request);
+
+		if ($this->attemptLogin($request)) {
+			$user = $this->guard()->user();
+			//$user->generateToken();
+		}
+
+		if (Admin::admins($user->id) == true)
+		{
+			info('LOGGED IN');
+			return view('home');
+		}
+		else
+		{
+			Auth::logout();
+			return view('welcome', ['message' => 'Permission denied, you are not admin']);
+		}
+    }
+	//apin kätyyämä logout
+	public function apilogout(Request $request)
 	{
 		$user = Auth::guard('api')->user();
 
@@ -66,6 +89,22 @@ class LoginController extends Controller
 			$user->save();
 			Auth::logout();
 			return response()->json(['message' => 'User logged out.'], 200);
+		}
+		
+		return response()->json(['message' => 'Logout failed.'], 401);
+
+		
+	}
+	//admin panelin käyttämä logout
+	public function logout(Request $request)
+	{
+		$user = Auth::guard()->user();
+
+		if ($user) {
+			$user->save();
+			Auth::logout();
+			//return response()->json(['message' => 'User logged out.'], 200);
+			return view('welcome');
 		}
 		
 		return response()->json(['message' => 'Logout failed.'], 401);
