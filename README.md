@@ -22,5 +22,5 @@ Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel RES
 
 ## Itse arvioinnit Palvelinohjelmoinnin kurssista
 
-**Joose 2
+* Joose 2
    * Hommaan oli motia niinkuin web-ohjelmoinninkin puolesta, mutta ulkomaanreissu toi mukanaan 2vko jälkeenjäämisen melkein joka aineessa, mitä en ehtinyt kiriä kunnolla kiinni, joten aikaloppui kesken. Viikkokin meni hukkaan kun sähkelsin laravelin asennuksessa enkä tajunnut ottaa konffaus tiedostosta pois puolipisteita ja manasin kun ei laraveli toimi. Siltä osin paljon aikaa ehdin käyttää työhön, onnistuin ihan ok omasta mielestäni.
