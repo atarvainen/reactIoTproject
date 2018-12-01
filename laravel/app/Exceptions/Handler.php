@@ -45,6 +45,8 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
+     //https://www.toptal.com/laravel/restful-laravel-api-tutorial -tutorialista
+     //Jos mallilla ei löydy tietokannasta, niin palauttaa json-muodossa 404-vastauksen. On siis helpommin koneluettava ja ei turhaan palauta html-sivua Reactille.0
     public function render($request, Exception $exception)
     {
       if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) 
@@ -56,8 +58,8 @@ class Handler extends ExceptionHandler
        
       return parent::render($request, $exception);
     }
-
 	//https://www.toptal.com/laravel/restful-laravel-api-tutorial
+	//Palauttaa virheen, jos kyselyssä ole ole authorization-otsaketta tai tilallisen yhdeyten (admin-paneeli) tapauksessa ei ole kirjautuneena. 
 	protected function unauthenticated($request, AuthenticationException $exception)
 	{
 		return response()->json(['error' => 'Unauthenticated'], 401);
