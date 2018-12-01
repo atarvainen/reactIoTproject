@@ -45,13 +45,10 @@ class Login extends Component {
         //check if api returned any ruuvitags belonging to user and set ruuvitags id to storage
         if (Object.keys(result.ruuvitags).length !== 0 && result.ruuvitags.constructor !== Object) {
           sessionStorage.setItem('ruuvi', JSON.stringify(result.ruuvitags[0].ruuvitagid));
-
-          this.props.fetchWithWorker();
           this.props.handleLogin();
         }
         //if user has no tag, handle login differently
         else {
-          console.log("trying to log");
           this.props.loginNoTag();
         }
       })
@@ -61,7 +58,6 @@ class Login extends Component {
         }
         //if api is not available, type error is raised
         else if (error.name === "TypeError") {
-          console.log("type");
           this.setState({ loginFail: true, loginError: "Failed connecting to login service." });
         }
         //else we can parse the error message api sends us

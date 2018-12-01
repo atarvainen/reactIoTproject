@@ -11,4 +11,5 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // Learn more about service workers: http://bit.ly/CRA-PWA
 
 //used customWorker.js instead of workbox package
-serviceWorker.register();
+//customWorker doesn't work in build
+serviceWorker.unregister();
