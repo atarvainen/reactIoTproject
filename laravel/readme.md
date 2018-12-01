@@ -67,7 +67,16 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 
 ## Kohdattuja ongelmia
 
-* CORS
+* CORS-ongelmia kun Laravel ja React ovat eri verkoissa
+   * Saatu toimimaan laittamalla tarvittavia otsakkeita suoraan Controllerin sisälle, ei hyvä ratkaisu
+   * Kirjoittamatta otsakkeet /bootstrap/app-tiedostoon. Selkeä ratkaisu, kaikki yhdessä paikassa.
+   * Apache .htaccess-tiedoston avulla. Ei saatu tyydyttävästi toimimaan. Silloin meillä oli tosin samalla palvelimella eri porteissa http ja Laravel, turhan monimutkaista ilman Linux-palvelinkurssia.
+   * Omia luokkia netissä olevien esimerkkien pohjalta. Toimi jotenkuten. Parempi kuitenkin käyttää valmista palikkaa.
+   * Barryvdh CORS Middleware for Laravel 5 on lopullisessa toteutuksessa ja sille on hyvät käyttöönotto-ohjeet GitHub:ssa.
 * Labranetin virtuaalikoneella liian vähän resursseja. Kaikki kyselyt eivät toimineet, poistettu 30.11. 150000 riviä Data-taulusta
 * Mixed Content kun Laravel Labranetin virtuaalikoneella ja React Studentilla. Korjattu ottamalla virtuaalikoneella käyttöön itse allekirjoitettu sertifikaatti, jolloin saatu https käyttöön. Aikaisemmin ei ongelma kun Student oli http.
 
+### Satunnaisia huomioita
+
+* Andreé Castelo:n Laravel Rest Api -tutoraali oli hyödyllinen hahmottamaan miten tehdä hyvien käytänteiden mukaan Laravelilla Rest API. https://www.toptal.com/laravel/restful-laravel-api-tutorial
+* 
