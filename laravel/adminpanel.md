@@ -4,7 +4,7 @@
 Tarkoituksena oli tehdä projektiin oma admin paneeli, mistä voidaan muokata MySQL-tietokantaa käyttäjien kohdalta. Toimintoja käyttöliittymässä olisi käyttäjän tietojen hakeminen, muokkaaminen ja poistaminen.
 
 ## Admin paneeliin kirjautuminen
-Admin paneeli sivustolle pääsee sisälle, kun kirjaudutaan kätrräjätunnuksilla, joiden id löytyy admins taulusta. Jos id:tä ei löydy, sivusto ilmoittaa siitä käyttäjälle ohjaamalla näkymään, mikä kertoo, että pääsy on evätty, koska et ole admin.
+Admin paneeli sivustolle pääsee sisälle, kun kirjaudutaan käyttäjätunnuksilla, joiden id löytyy admins taulusta. Jos id:tä ei löydy, sivusto ilmoittaa siitä käyttäjälle ohjaamalla näkymään, mikä kertoo, että pääsy on evätty, koska et ole admin.
 ![Admin Edit näkymä](../images/apunauth.PNG)
 
 ## Admin näkymä
