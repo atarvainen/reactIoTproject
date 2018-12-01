@@ -64,18 +64,31 @@ Viivakaaviossa oletus tyylityksenä on täyttää myös viivan alapuolinen osa.
 
 Piirakkakaaviota voisi käyttää läsnäolon mittaamiseen paremmin, mutta tätä toiminnallisuutta ei ole apissa, joten tämä on vain esimerkkinä.
 
-# Komponentit
+# Luokat
 
 * App.js
   * Käytetään käyttäjän kirjautumisen tarkistamiseen ennen näkymän renderöintiä
   * Välittää käyttäjän tietoja mainiin jos käyttäjä on kirjautunut
 * Main.js
   * Suurin osa toiminnallisuudesta
-  * Välittää Navbarille ja muille komponenteille tarvittavia funktioita
+  * Välittää Navbarille ja muille luokille tarvittavia funktioita
   * Datan fetchaus tapahtuu täällä
   * Kaavioiden konditionaalinen renderäys chartmenussa tapahtuvien käyttäjän valintojen mukaan
 * NavBar.js
   * Sisältää Login, Register ja User settings renderöintiä
+  * Login yms buttonien renderöinti isLogged tilan mukaan
+  * Käsittelee login ja registerin pyytämät toiminnot
+* Login.js
+  * Hoitaa login formin fetch postaamisen apille, vastauksen tallentamisen sessionstorageen ja kutsuu parent luokkien metodeja käsittelemään login/register
+* Register.js
+  * Toimii samalla tavalla kuin login mutta lähettää register pyynnön apille
+* ChartMwnu.js
+  * Hoitaa käyttäjän datan ja kaavion valinnat ja kutsuu parent classin funktioita käsittelemäan nämä
+* Line.js, Bar.js, Doughtnut.js
+  * Ottaa vastaan kaavion piirtämiseen käytettävän datan ja otsikon yms. optionit Main.jssästä ja renderöi kaavion
+* public/customWorker.js
+  * Kaappaa fetchit ja tarkistaa cachestä löytyykö haettu data jo valmiiksi, jos ei niin data haetaan apista
+* Loput workkerit olisivat hakeneet datan heti käyttäjän kirjautuessa, mutta tätä ei saatu toimimaan build versiossa
 
 # Toteutuneet toiminnot
 
@@ -115,7 +128,7 @@ Yritimme myös react app rewired kirjastoa, joka sallii webpackin konfiguroinnin
 
 Reactin toteutus kärsi samanaikaisesta apin devauksesta. Apin ollessa erillisillä virtuaalikoneilla, ei aina samassa osoitteessa, eikä välillä edes toiminnassa toi haasteita fetchien toiminnallisuuden toteuttamiseen. Suurin osa toiminnoista kuitenkin vaativat apin toimiakseen.
 
-Virtuaalikoneilla kaavioiden piirtäminen tuotti ongelmia. Yritimme siirtää kaavioiden renderäyksen toiminnan webworkkereille, mutta webpackiä käyttäviin workereihin komponenttien importtaaminen ei onnistunut. Tämä ei tosin ole ongelma normaalissa käyttöympäristössä, tai jos virtuaalikoneelle antaa käyttöön enemmän resursseja.
+Virtuaalikoneilla kaavioiden piirtäminen tuotti ongelmia. Yritimme siirtää kaavioiden renderäyksen toiminnan webworkkereille, mutta webpackiä käyttäviin workereihin luokkien importtaaminen ei onnistunut. Tämä ei tosin ole ongelma normaalissa käyttöympäristössä, tai jos virtuaalikoneelle antaa käyttöön enemmän resursseja.
 
 Buildin jälkeinen toiminta tuotti ongelmia erityisesti workkerien osalta, npm ei osannut rakentaa webworkerien polkuja oikein. Buildaaminen onnistui ongelmitta, mutta sivusto ei saanut lähetettyä tietoa workkereille.
 
@@ -129,7 +142,13 @@ Reactin muunnos build versioon onnistuu yksinkertaisesti vaihtamalla package.jso
 
 # Pohdinta
 
+Saimme mielestämme tehtyä toimivan ratkaisun RuuviTagien datan visualisointiin apista. Osa toiminnallisuudesta jäi puuttumaan ajan puuutteen vuoksi ja osaa ratkaisuista emme saaneet toimimaan, kuten haluttu, mutta kokonaisuutena projekti onnistui hyvin.
 
+# Arvioinnit
+
+Hannu Oksman: 5, 
+Antti Tarvainen: 5
+Joose Seppälä: 1
 
 
 
