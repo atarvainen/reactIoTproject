@@ -18,6 +18,8 @@ Kaikenlaisen tyylittelyn jätimme tärkeysjärjestyksessä alimmaksi, joten täm
 
 Konditionaaliseen renderäykseen käytetty useita menetelmiä, if else jos halusimme monia eri vaihtoehtoja samaan kohtaan eri tilanteissa. Ternary operaattoria jos komponentteja vain toggletaan pois tai päälle, tosin tämäkin on vain lyhennys if elsestä, mutta siistimpi ehkä käyttää render metodissa.
 
+Komponenttien renderöintiehdot tallennettu boolean tiloiksi.
+
 ![reactApp](/images/ui.PNG)
 
 Yksinkertainen alkunäkymä, jossa pyydämme käyttäjää rekisteröitymään tai kirjautumaan sisään, jollei kirjautumista ole sessiomuistissa.
@@ -62,6 +64,18 @@ Viivakaaviossa oletus tyylityksenä on täyttää myös viivan alapuolinen osa.
 
 Piirakkakaaviota voisi käyttää läsnäolon mittaamiseen paremmin, mutta tätä toiminnallisuutta ei ole apissa, joten tämä on vain esimerkkinä.
 
+# Komponentit
+
+* App.js
+  * Käytetään käyttäjän kirjautumisen tarkistamiseen ennen näkymän renderöintiä
+  * Välittää käyttäjän tietoja mainiin jos käyttäjä on kirjautunut
+* Main.js
+  * Suurin osa toiminnallisuudesta
+  * Välittää Navbarille ja muille komponenteille tarvittavia funktioita
+  * Datan fetchaus tapahtuu täällä
+  * Kaavioiden konditionaalinen renderäys chartmenussa tapahtuvien käyttäjän valintojen mukaan
+* NavBar.js
+  * Sisältää Login, Register ja User settings renderöintiä
 
 # Toteutuneet toiminnot
 
@@ -101,11 +115,21 @@ Yritimme myös react app rewired kirjastoa, joka sallii webpackin konfiguroinnin
 
 Reactin toteutus kärsi samanaikaisesta apin devauksesta. Apin ollessa erillisillä virtuaalikoneilla, ei aina samassa osoitteessa, eikä välillä edes toiminnassa toi haasteita fetchien toiminnallisuuden toteuttamiseen. Suurin osa toiminnoista kuitenkin vaativat apin toimiakseen.
 
+Virtuaalikoneilla kaavioiden piirtäminen tuotti ongelmia. Yritimme siirtää kaavioiden renderäyksen toiminnan webworkkereille, mutta webpackiä käyttäviin workereihin komponenttien importtaaminen ei onnistunut. Tämä ei tosin ole ongelma normaalissa käyttöympäristössä, tai jos virtuaalikoneelle antaa käyttöön enemmän resursseja.
+
 Buildin jälkeinen toiminta tuotti ongelmia erityisesti workkerien osalta, npm ei osannut rakentaa webworkerien polkuja oikein. Buildaaminen onnistui ongelmitta, mutta sivusto ei saanut lähetettyä tietoa workkereille.
 
-Devaus serviceworkkerin päällä ollessa tuhlasi jonkin verran aikaa, worker tallensi cacheen koko sivuston ja muutoksia ei saanut näkyviin ilman cachen tyhjennystä. Tämän tajuamiseen meni hukkaan pari tuntia
+Serviceworkerin käyttö devaus vaiheessa oletuksena on pois päältä, mutta workerin toimintaa muuttaessa tämä otettiin pois päältä.
+
+Devaus serviceworkkerin päällä ollessa, worker tallensi cacheen koko sivuston ja muutoksia ei saanut näkyviin ilman cachen tyhjennystä. Tämän tajuamiseen meni hukkaan pari tuntia.
+
+# React app käyttöönotto
+
+Reactin muunnos build versioon onnistuu yksinkertaisesti vaihtamalla package.json tiedostoon haluttu "homepage" ja ajamalla terminaalissa npm run build. Tämän jälkeen build kansion sisältö voidaan siirtää haluttuun kohteeseen.
 
 # Pohdinta
+
+
 
 
 
