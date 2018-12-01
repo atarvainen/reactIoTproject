@@ -13,6 +13,8 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+	
+    //Tänne täytyi tuoda uusia classeja CORS-konfiguraatioita varten
     protected $middleware = [
         \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -39,6 +41,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+	//Viimeisimmässä toteutuksessa käytämme Barryvdh-kirjastoa. Kun tänne tekee tämän, niin ei tarvitse erikseen api.php merkata mille reiteille kirjasto on käytössä.
         'api' => [
             'throttle:60,1',
             'bindings',
@@ -64,6 +67,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         //other middlewares
+	    
+	//Joosen tekemä oma middleware. Toteutuskokeilu, ei ehkä toimi
 	'admin' => \App\Http\Middleware\AdminMiddleware::class,
         //'cors' => 'App\Http\Middleware\CORS',
     ];
