@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-	
+	//Kun on rekisteröitynyt, niin ensimmäinen api_key generoituu automaattisesti ja käyttäjän data palautetaa JSON-muodossa
 	//https://www.toptal.com/laravel/restful-laravel-api-tutorial
 	protected function registered(Request $request, $user)
 	{
