@@ -10,6 +10,7 @@ Toimintoja
 * sisäänkirjautuminen ja rekisteröityminen.
 * käyttäjätietojen muokkaus, password reset.
 * lämpötila-, kosteus- ja läsnäolodatan haku apista.
+* kaavioiden piirtäminen chart.js:llä
 
 # Toteutuneet toiminnot
 # Käyttöliittymä
@@ -67,5 +68,13 @@ Saimme toteutettua suurimman osan toiminnoista, vaikka apin puutteet ei sallinut
 
 Kirjautuminen ja rekisteröityminen toimivat saumattomasti.
 
-Käyttäjän tietojen muokkais jäi ajan loppuessa puuttumaan.
+Käyttäjän tietojen muokkaus jäi ajan loppuessa puuttumaan.
+
+Kaavioiden piirtäminen toimii, tähän yritimme rakentaa webWorkkereitä pirtäämään kaavion valmiiksi, webworker ei toimi.
+
+Datan hakeminen toimii reactista apiin, tähän myös otimme käyttöön webWorkkerit, jotka hakivat datan valmiiksi heti käyttäjän kirjauduttua. Fetchworkkerit toimivat vain devaus vaiheessa, npm run build jälkeen workkerit lakkasivat toimimasta.
+
+Ylimääräisenä otimme käyttöön osaksi sisäänrakennetun create-react-appiin ja osittain itse kustomoimamme service workkerin, joka ns. toimii proxyna sivun ja apin välissä.
+
+Kaikki fetchit menevät serviceworkkerin kautta ja worker tarkistaa ensin onko cachessä jo valmiiksi haettavaa dataa, jos ei fetch lähetetään apille asti ja response tallennetaan cacheen ja palautetaan alkuperäiseen fetchiin.
 
