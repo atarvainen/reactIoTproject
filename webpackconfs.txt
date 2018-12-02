@@ -32,7 +32,8 @@ module.exports = {
     },
     plugins: [
 	
-		//tämä tyhjentää dist-kansion. Kätevä, niin vanhojen buildien tiedostoja ei ole kummittelemassa siellä. Voi olla varma, että kansion tiedostot ovat uusimman buildin.
+		//tämä tyhjentää dist-kansion. Kätevä, niin vanhojen buildien tiedostoja ei ole kummittelemassa siellä. Voi olla varma,
+		//että kansion tiedostot ovat uusimman buildin.
         new CleanWebpackPlugin(['dist']),
 		//tämä generoi automaattisesti toimivan index.html, ei siis tarvitse tehdä omaa
         new HtmlWebpackPlugin({
@@ -46,7 +47,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     }
 	
-	//webpack on todella paljon erilaisia loader-plugineita, jotka osaavat käsitellä tiettyjä tiedostotyyppejä, jotta ne paketoituvat oikein kun suorittaa buildin
+	//webpack on todella paljon erilaisia loader-plugineita, jotka osaavat käsitellä tiettyjä tiedostotyyppejä, jotta ne
+	//paketoituvat oikein kun suorittaa buildin
     module: {
         rules: [
             {
@@ -126,7 +128,8 @@ module.exports = {
     "not op_mini all"
   ],
   
-  //kaikkia näitä ei varmasti tarvitse. Kun yritin saada webpack toimimaan meidän Reactin kanssa, niin kahlasin eri tutoriaaleja ja Stackoverflow läpi. Ei ehditty siivota näistä tarpeettomia
+  //kaikkia näitä ei varmasti tarvitse. Kun yritin saada webpack toimimaan meidän Reactin kanssa, niin kahlasin eri tutoriaaleja ja
+  //Stackoverflow läpi. Ei ehditty siivota näistä tarpeettomia
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
