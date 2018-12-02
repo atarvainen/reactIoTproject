@@ -1,0 +1,161 @@
+// webpack-käyttö vaatii säätöjä kolmeen eri tiedostoon. 
+
+// webpack.config.js
+
+// alustuksia
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+
+module.exports = {
+
+	//tässä määritellään mitkä tiedostot paketoidaan. Huom. tässä ei tarvitse olla esim css-tiedostoa, joka on import App.js
+    entry: {
+        'bundle.js': [
+            path.resolve(__dirname, './src/App.js'),
+            //path.resolve(__dirname, './src/App.test.js'),
+            path.resolve(__dirname, './src/Bar.js'),
+            path.resolve(__dirname, './src/ChartMenu.js'),
+            path.resolve(__dirname, './src/ChartWorker.js'),
+            path.resolve(__dirname, './src/Doughnut.js'),
+            path.resolve(__dirname, './src/index.js'),
+            path.resolve(__dirname, './src/Line.js'),
+            path.resolve(__dirname, './src/Login.js'),
+            path.resolve(__dirname, './src/Main.js'),
+            path.resolve(__dirname, './src/Navbar.js'),
+            path.resolve(__dirname, './src/Register.js'),
+            path.resolve(__dirname, './src/serviceWorker.js'),
+            //path.resolve(__dirname, './src/Settings.js'),
+            //path.resolve(__dirname, './src/WebWorker.js')
+        ]
+    },
+    plugins: [
+	
+		//tämä tyhjentää dist-kansion. Kätevä, niin vanhojen buildien tiedostoja ei ole kummittelemassa siellä. Voi olla varma, että kansion tiedostot ovat uusimman buildin.
+        new CleanWebpackPlugin(['dist']),
+		//tämä generoi automaattisesti toimivan index.html, ei siis tarvitse tehdä omaa
+        new HtmlWebpackPlugin({
+            title: 'React Laravel RuuviTag IoT'
+        })
+    ],
+	
+	//minkä niminen ja mihin kansioon build laitetaan. [name] on dynaaminen ja se luetaan entry:sta. bundle.js tässä tapauksessa
+    output: {
+        filename: '[name]',
+        path: path.resolve(__dirname, 'dist')
+    }
+	
+	//webpack on todella paljon erilaisia loader-plugineita, jotka osaavat käsitellä tiettyjä tiedostotyyppejä, jotta ne paketoituvat oikein kun suorittaa buildin
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                type: 'javascript/auto',
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+			
+			//tämä on Reactin tapauksessa pakollinen, jsx-syntaksin käsittelyyn käytetään babelia
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                }
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                exclude: [
+                    /\.html$/,
+                    /\.(js|jsx)$/,
+                    /\.css$/,
+                    /\.scss$/,
+                    /\.json$/,
+                    /\.bmp$/,
+                    /\.gif$/,
+                    /\.jpe?g$/,
+                    /\.png$/,
+                    /\.ejs$/,
+                  ],
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
+            }
+        ]
+    }
+};
+
+// package.json
+
+{
+  "name": "migratetowebpack",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "chart.js": "^2.7.3",
+    "react": "^16.6.3",
+    "react-chartjs-2": "^2.7.4",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1"
+  },
+  
+  //käytetään npm run build webpack. webpack on myös hyvä devserver, jota olisi voinut käyttää start:ssa
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "webpack --mode development",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  
+  //kaikkia näitä ei varmasti tarvitse. Kun yritin saada webpack toimimaan meidän Reactin kanssa, niin kahlasin eri tutoriaaleja ja Stackoverflow läpi. Ei ehditty siivota näistä tarpeettomia
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "react-hot-loader": "^4.3.12",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
+
+// .babelrc
+
+//ei tarvitse enempää, plugins ei tarvitse kaikissa tapauksissa
+{
+    "presets": [
+        "@babel/preset-react",
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "@babel/plugin-proposal-class-properties"
+    ]
+}
