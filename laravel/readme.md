@@ -60,12 +60,12 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
 * /routes/api.php
 * /routes/web.php
 
-## Toteuttamatta jääneet ominaisuudet
+## Toteutumattomat tai vajaaksi jääneet ominaisuudet
 
-* Admin-panel, josta voisi lisätä ja poistaa Ruuvitag-sensoreita sekä käyttäjiä.
+* Admin-paneeli, josta voisi lisätä ja poistaa Ruuvitag-sensoreita sekä käyttäjiä.
 * Käyttäjät eivät voi asettaa itselleen tai poistaa itseltään Ruuvitag-sensoreita
 
-## Kohdattuja ongelmia
+## Kohdattuja ongelmia (paljon enemmän oli, joita emme enää muista)
 
 * CORS-ongelmia kun Laravel ja React ovat eri verkoissa
    * Saatu toimimaan laittamalla tarvittavia otsakkeita suoraan Controllerin sisälle, ei hyvä ratkaisu
@@ -73,15 +73,24 @@ Rajapinta palauttaa käyttäjätiedot, api_token -avaimen sekä käyttäjälle o
    * Apache .htaccess-tiedoston avulla. Ei saatu tyydyttävästi toimimaan. Silloin meillä oli tosin samalla palvelimella eri porteissa http ja Laravel, turhan monimutkaista ilman Linux-palvelinkurssia.
    * Omia luokkia netissä olevien esimerkkien pohjalta. Toimi jotenkuten. Parempi kuitenkin käyttää valmista palikkaa.
    * Barryvdh CORS Middleware for Laravel 5 on lopullisessa toteutuksessa ja sille on hyvät käyttöönotto-ohjeet GitHub:ssa.
+   * Asetukset ovat /vendor/barryvdh/laravel-cors/config/cors.php -tiedostosssa.
 * Labranetin virtuaalikoneella liian vähän resursseja. Kaikki kyselyt eivät toimineet, poistettu 30.11. 150000 riviä Data-taulusta
 * Mixed Content kun Laravel Labranetin virtuaalikoneella ja React Studentilla. Korjattu ottamalla virtuaalikoneella käyttöön itse allekirjoitettu sertifikaatti, jolloin saatu https käyttöön. Aikaisemmin ei ongelma kun Student oli http.
+* Transaktio-ongelma tietokannan kanssa. Havaittu bugi kun login, jolloin generoidaan uusi api_token ja palautetaan käyttäjätiedot. Ongelma oli, että joskus palautui vanha api_token eli uusi generoitu api_token ei ollut ehtinyt tallentua tietokantaa. Tästä johtui tuntiesityksessä ollut "unauthorized"-ongelma. Korjattu siten, että login tallentaa kantaan ja palauttaa suoraan uuden api_token, eikä erikseen hae sitä kannasta. Tässä olisi voinut kokeilla Laravelin transaktioita, muttemme ehtineet.
 
-### Satunnaisia huomioita
+## Pohdinta
 
 * Andreé Castelo:n Laravel Rest Api -tutoraali oli hyödyllinen hahmottamaan miten tehdä hyvien käytänteiden mukaan Laravelilla Rest API. https://www.toptal.com/laravel/restful-laravel-api-tutorial
-* 
+* Onnistuimme toteuttamaan suhteellisen laajan kokonaisuuden, josta olemme ylpeitä.
+* Kehitysideoita seuraavia projekteja ajatellen:
+   * Tuntikirjanpito vartin tai puolen tunnin tarkkuudella. Teimme älyttömän määrän tunteja tänä syksynä tähän kokonaisuuteen liittyen, mutta kaikkea ei voi nyt osoittaa. Olemme tehneet todella paljon työtä, joka ei näy lopullisessa koodissa tai ympäristössä. Hukkaan sekään aika ei toki ole mennyt, olemme oppineet paljon ja saanut kohtuullisen laajan ja selkeän kuvan full stack -toteutuksesta (sensorit, palvelimet, siirtoväylät, kannat, backend, frontend jne.) ja MVC-mallista.
+   * Meidän oli hankala kehittää rinnakkain samaa ohjelmaosiota. Esim. Antti teki enemmän React kuin Hannu ja toisinpäin Laravel:n suhteen, jotta 1) ei tule merge conflicts, 2) saa toteutetua rauhassa jonkun osakokonaisuuden, jos on näkemys miten voi tehdä, 3) eritahtisuus työajassa. Hannu teki enimmäkseen iltaisin, Antti enimmäkseen myöhemmin, jolloin ei kannata jäädä odottamaan itse tarvitsemaa komponenttia, jota toinen työstää. On parempi tehdä itse, jottei hukkaa aikaa. Eli lyhyesti taskitus ja projektinhallinta siten, että kaikki voivat tehdä kaikkea tasapainoisemmin.
+   * Uuden koodin ja toiminnallisuuden kirjoittamisen täytyy loppua useampia päiviä ennen palautuspäivää, jotta jää aikaa ohjelman tuotantoympäristön siirtämiselle, toimivuuden tarkistamiselle ja dokumentoinnille. Nyt meillä hajosi tuotantopalvelin, jossa on toimivat buildit ja viimeisenä päivänä toteutimme vielä uutta toiminnallisuutta, joka aiheutti ongelmia.
 
 ## Itsearvioinnit
 
 * Joose 2
    * Hommaan oli motia niinkuin web-ohjelmoinninkin puolesta, mutta ulkomaanreissu toi mukanaan 2vko jälkeenjäämisen melkein joka aineessa, mitä en ehtinyt kiriä kunnolla kiinni, joten aikaloppui kesken. Viikkokin meni hukkaan kun sähkelsin laravelin asennuksessa enkä tajunnut ottaa konffaus tiedostosta pois puolipisteita ja manasin kun ei laraveli toimi. Siltä osin paljon aikaa ehdin käyttää työhön, onnistuin ihan ok omasta mielestäni.
+   
+* Hannu 5
+   * Olin kaikessa mukana suunnittelusta palvelimelle laittoon ja tein kaikentyyppisiä tiedostoja ja asetuksia. En ehtinyt ohjelmoida niin paljon kuin olisin halunnut, esim. monipuolisempia rajauksia hauille ja yksikkötestien kirjoittaminen, mikä sinänsä on opintojakson laajuuden ulkopuolella, mutta olisi saattanut säästää aikaakin. Meillä kului tämän opintojakson kannalta tarpeettoman paljon aikaa palvelimien säätöön esim. https-käyttöönotto, useammassa portissa apache2 virtualhost, palomuuriasetukset ufw ja iptables. Halusimme kuitenkin tehdä täydellisen putken mittaussensorista loppukäyttäjän selaimeen. 
