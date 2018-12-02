@@ -124,6 +124,22 @@ Webworkkerien toimintaa yritimme monella eri tekniikalla saada toimimaan build v
 
 Yritimme myös react app rewired kirjastoa, joka sallii webpackin konfiguroinnin ilman npm ejectiä, mutta tässä myöskään workerit eivät toimineet buildissa.
 
+## Lähdetiedostojen ja riippuvuuksien käsittely webpack:lla
+
+* webpack on staattinen moduulien paketointikirjasto, joka paketoi koodit, kuvat, scriptit, html-sivut ynnä muut proktin käyttämät tiedostot build-vaiheessa.
+* Lopputuloksena on yksi tai useampi tiedosto, jotka on helppo siirtää tuotantoympäristöön. Useampi tiedosto voi olla tarpeen, jos ohjelma on suuri, jolloin sivuston latausaika on nopeampi, kun ei tarvitse yhtä suurta tiedostoa ladata kerralla. Muut tiedostot latautuvat asynkronisesti.
+* Paljon muita hyviä tuotantoa tukevia ominaisuuksia kts. [npm-sivu](https://www.npmjs.com/package/webpack) ja [virallinen sivu]( https://webpack.js.org/concepts/).
+
+### Meidän webpack-käyttö
+
+* Saimme säädettyä asetukset niin, että webpack paketoi kaiken yhteen js-tiedostoon. Mutta kun sen sitä palveli esim. [serve:lla](https://www.npmjs.com/package/serve), niin tuli anonymous-virheitä, joita ei ehditty selvittää.
+* Muutenkin meni monta tuntia, että sai ratkottua JSX-liittyviä ongelmia konfiguroinneissa.
+* Olisi pitänyt ottaa webpack heti alussa käyttöön, jotta ongelmat olisi ollut nopeampia selvittää ja saada asetukset oikein.
+* Konfiguraatiotiedostot kommentteineen ovat [täällä](https://github.com/atarvainen/reactIoTproject/blob/master/webpackconfs.txt).
+* Alla on kuva onnistuneesta webpack:n käytöstä. Alussa on "Chunk Names"-jossa on ulostulevat tiedostot. Tässä siis kaikki on paketoitu bundle.js. Lopussa generoidaan vielä index.html automaattisesti. Seuraavaksi siirtää vain index.html ja bundle.js tuotantopalvelimelle.
+
+![webpackbuild](https://github.com/atarvainen/reactIoTproject/blob/master/images/npmrunbuild.PNG)
+
 # Ongelmatilanteita
 
 Reactin toteutus kärsi samanaikaisesta apin devauksesta. Apin ollessa erillisillä virtuaalikoneilla, ei aina samassa osoitteessa, eikä välillä edes toiminnassa toi haasteita fetchien toiminnallisuuden toteuttamiseen. Suurin osa toiminnoista kuitenkin vaativat apin toimiakseen.
