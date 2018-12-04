@@ -2,6 +2,10 @@
 
 Hannu Oksman L2912, Antti Tarvainen L4623, Joose Seppälä M3579
 
+# Käyttäjätunnukset
+
+React: han@oks.fi, sala1234. Uusia käyttäjiä voi rekisteröidä, mutta heille ei ole asetettu RuuviTag-sensoria, joten heille ei voi piirtää dataa. Tällä hetkellä tarvitsee käyttäjään liitetyn sensorin, jotta näkee dataa. Laravelin puolella on admin-hallintapaneeli, mutta siihen ei ehditty toteuttaa toiminnallisuutta, jolla käyttäjille tai käyttäjät voisivat lisätä ja poistaa sensoreita.
+
 # Yleiskuvaus/suunnitelma
 
 TTOS0900 kurssille tekemäämme Laravel APIa hyödyntävä npm React sivu. Tarkoituksena on hyödyntää apista saatavaa dataa kaavioiden piirtämiseen reactilla ja chart.js kirjastolla. Autentikointiin käytämme myös apin toimintoja.
