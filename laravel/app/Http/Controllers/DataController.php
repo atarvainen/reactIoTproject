@@ -10,7 +10,7 @@ class DataController extends Controller
 	//Hakee kaiken datan Data-mallin kautta Data-taulusta
     public function index()
     {
-        return Data::all();
+        return Data::take(1000)->get();
     }
  
 	//Hakee tietyn tietueen id-numerolla (taulussa 'Count') Data-mallin kautta

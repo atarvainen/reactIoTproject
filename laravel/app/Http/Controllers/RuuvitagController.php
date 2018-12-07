@@ -1,11 +1,9 @@
 <?php
  
 namespace App\Http\Controllers;
-
 use App\Ruuvitag; 
 use DB;
 use Illuminate\Http\Request;
-
 class RuuvitagController extends Controller
 {
 	//Hakee kaikki Ruuvitag-sensorien tiedot mallin kautta tietokantataulusta
@@ -13,7 +11,6 @@ class RuuvitagController extends Controller
     {
         return Ruuvitag::all();
     }
-
 	//Hakee tietyn Ruuvitag:n tiedot Ruuvitag:n MAC:n perusteella (muunnettu bigint tietokantaa  varten)
     public function show(Ruuvitag $tag)
     {
@@ -32,9 +29,7 @@ class RuuvitagController extends Controller
  
         return response()->json($tag, 201);
         */
-
         $tag = Ruuvitag::create($request->all());
-
         return response()->json($tag, 201);
     }
  
@@ -95,7 +90,6 @@ class RuuvitagController extends Controller
     {   
         //käyttäjän antama päivämäärä muutetaan muotoon 2018-11-21% jotta aikaleima saadaan ohitettua
         $day = $day . '%';
-
         //select `Temp`, `CAST(Time` as `day)` from `Data`
         //select `Temp`, `CAST(Time` as `day)` from `Data`
         //select Temp, cast(Time as day) from `Data` 
@@ -122,7 +116,7 @@ class RuuvitagController extends Controller
         echo $data;
     }
     
-    public function taghumd($tag, $day)
+    public function taghumh($tag, $day)
     {
         $day = $day . '%';
         
@@ -133,7 +127,7 @@ class RuuvitagController extends Controller
         echo $data;
     }
     
-    public function taghumh($tag)
+    public function taghumd($tag, $day)
     {
         $day = $day . '%';
         $taga = Ruuvitag::find($tag);
