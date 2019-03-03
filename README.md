@@ -1,6 +1,6 @@
 # TTOMS0500 ja TTOMS0900
 
-Yhdistettynä IoT-opintojakson RuuviTag-sensoreista saadulle datalle rakennettu Laravel REST API -rajapinta ja tätä hyödyntävä React-frontend. Alla on kuva käytetyistä teknologioista.
+Yhdistettynä IoT-opintojakson RuuviTag-sensoreista saadulle datalle rakennettu Laravel REST API -rajapinta ja tätä hyödyntävä React-frontend. Full stack -toteutus. Alla on kuva käytetyistä teknologioista.
 
 ### [React-dokumentaatio](/react/README.md)
 
@@ -14,4 +14,4 @@ Yhdistettynä IoT-opintojakson RuuviTag-sensoreista saadulle datalle rakennettu 
 
 #### Ryhmän jäsenet
 
-[Hannu Oksman L2912](https://github.com/szeretni), [Joose Seppälä M3579](https://github.com/jooseba), [Antti Tarvainen L4623](https://github.com/atarvainen
+[Hannu Oksman L2912](https://github.com/szeretni), [Joose Seppälä M3579](https://github.com/jooseba), [Antti Tarvainen L4623](https://github.com/atarvainen)
