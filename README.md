@@ -1,14 +1,17 @@
 # TTOMS0500 ja TTOMS0900
 
-[Latest React build](https://student.labranet.jamk.fi/~L4623/ttos0500/)
+Yhdistettynä IoT-opintojakson RuuviTag-sensoreista saadulle datalle rakennettu Laravel REST API -rajapinta ja tätä hyödyntävä React-frontend. Alla on kuva käytetyistä teknologioista.
 
-[Latest Laravel build](https://192.168.9.133)
+### [React-dokumentaatio](/react/README.md)
 
-Yhdistettynä IoT kurssin Ruuvitageistä saadulle datalle rakennettu Laravel REST API rajapinta ja tätä hyödyntävä NPM React frontend.
+### [Laravel API -dokumentaatio](/laravel/readme.md)
 
-### [React dokumentaatio](/react/README.md)
+### [Laravel admin panel -dokumentaatio](/laravel/adminpanel.md)
 
-### [Laravel API dokumentaatio](/laravel/readme.md)
+![technologies](https://github.com/atarvainen/IoT_Project/raw/master/images/technologies.png)
 
-### [Laravel admin panel dokumentaatio](/laravel/adminpanel.md)
+#### [IoT-toteutus](https://github.com/atarvainen/IoT_Project)
 
+#### Ryhmän jäsenet
+
+[Hannu Oksman L2912](https://github.com/szeretni), [Joose Seppälä M3579](https://github.com/jooseba), [Antti Tarvainen L4623](https://github.com/atarvainen
