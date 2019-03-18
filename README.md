@@ -14,4 +14,4 @@ Yhdistettynä IoT-opintojakson RuuviTag-sensoreista saadulle datalle rakennettu 
 
 #### Ryhmän jäsenet
 
-[Hannu Oksman L2912](https://github.com/szeretni), [Joose Seppälä M3579](https://github.com/jooseba), [Antti Tarvainen L4623](https://github.com/atarvainen)
+[Hannu Oksman L2912](https://student.labranet.jamk.fi/~L2912/) ([GitHub](https://github.com/szeretni)), [Joose Seppälä M3579](https://github.com/jooseba), [Antti Tarvainen L4623](https://github.com/atarvainen)
